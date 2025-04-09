@@ -1,4 +1,4 @@
-namespace CQRS_template
+namespace CT.API
 {
     public class WeatherForecast
     {
