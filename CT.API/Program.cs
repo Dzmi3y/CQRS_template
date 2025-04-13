@@ -1,12 +1,18 @@
+using CT.Application.Products.Queries;
+using CT.Domain.Interfaces.Repositories;
+using CT.Infrastructure.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
+    typeof(GetProductListQuery).Assembly,
+    typeof(GetProductListHandler).Assembly
+));
+builder.Services.AddScoped<IProductRepository,ProductRepository>();
 
 builder.Services.AddControllers();
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
 
 app.UseHttpsRedirection();
 
