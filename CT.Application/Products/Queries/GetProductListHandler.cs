@@ -15,7 +15,7 @@ namespace CT.Application.Products.Queries
         }
         public async Task<List<Product>> Handle(GetProductListQuery request, CancellationToken cancellationToken)
         {
-          return await _productRepository.GetListAsync(request.count);
+            return await _productRepository.GetListAsync(request.count);
         }
     }
 }

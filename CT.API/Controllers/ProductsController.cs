@@ -11,7 +11,7 @@ namespace CT.API.Controllers
         private readonly IMediator _mediator;
         public ProductsController(IMediator mediator)
         {
-            _mediator= mediator;
+            _mediator = mediator;
         }
         [HttpGet]
         public async Task<IActionResult> Get(int count)
