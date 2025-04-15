@@ -1,6 +1,6 @@
 ﻿using CT.Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
 namespace CT.Infrastructure
@@ -19,7 +19,7 @@ namespace CT.Infrastructure
             optionsBuilder.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
 
 
-            return new AppDbContext(optionsBuilder.Options); 
+            return new AppDbContext(optionsBuilder.Options);
         }
     }
 }

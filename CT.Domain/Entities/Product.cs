@@ -1,6 +1,6 @@
 ﻿using CT.Domain.Entities.Base;
-using System.ComponentModel.DataAnnotations;
 using CT.Domain.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace CT.Domain.Entities
 {
