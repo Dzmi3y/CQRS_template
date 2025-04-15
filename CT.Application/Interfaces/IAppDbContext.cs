@@ -1,7 +1,7 @@
 ﻿using CT.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace CT.Domain.Interfaces
+namespace CT.Application.Interfaces
 {
     public interface IAppDbContext
     {

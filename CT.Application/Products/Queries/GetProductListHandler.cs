@@ -1,5 +1,5 @@
-﻿using CT.Domain.Entities;
-using CT.Domain.Interfaces;
+﻿using CT.Application.Interfaces;
+using CT.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 

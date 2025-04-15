@@ -15,9 +15,11 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="9.0.4" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.4" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.8.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CT.Application\CT.Application.csproj" />
     <ProjectReference Include="..\CT.Domain\CT.Domain.csproj" />
   </ItemGroup>
 
