@@ -1,21 +1,24 @@
-﻿
-using CT.Domain.Entities;
-using CT.Domain.Interfaces.Repositories;
+﻿using CT.Domain.Entities;
+using CT.Domain.Interfaces;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace CT.Application.Products.Queries
 {
     public class GetProductListHandler : IRequestHandler<GetProductListQuery, List<Product>>
     {
-        private readonly IProductRepository _productRepository;
+        private readonly IAppDbContext _appDbContext;
 
-        public GetProductListHandler(IProductRepository productRepository)
+        public GetProductListHandler(IAppDbContext appDbContext)
         {
-            _productRepository = productRepository;
+            _appDbContext = appDbContext;
         }
         public async Task<List<Product>> Handle(GetProductListQuery request, CancellationToken cancellationToken)
         {
-            return await _productRepository.GetListAsync(request.count);
+            return await _appDbContext.Products
+                .AsNoTracking()
+                .Take(request.count)
+                .ToListAsync<Product>(cancellationToken);
         }
     }
 }
