@@ -1,13 +1,21 @@
-using CT.Application.Products.Queries;
-using CT.Application.Interfaces;
-using CT.Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using CT.Application.Interfaces;
 using CT.Application.Interfaces.Services;
+using CT.Application.Products.Handlers;
+using CT.Application.Products.Queries;
+using CT.Application.Users.Commands;
+using CT.Application.Users.Handlers;
+using CT.Application.Users.Queries;
+using CT.Domain.Entities;
 using CT.Infrastructure.Identity.Config;
 using CT.Infrastructure.Identity.Services;
+using CT.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,9 +23,23 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<IAppDbContext, AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
+
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
     typeof(GetProductListQuery).Assembly,
-    typeof(GetProductListHandler).Assembly
+    typeof(GetProductListHandler).Assembly,
+    typeof(GetUserByEmailQuery).Assembly,
+    typeof(GetUserByEmailHandler).Assembly,
+    typeof(AuthenticateUserCommand).Assembly,
+    typeof(AuthenticateUserHandler).Assembly
 ));
 
 JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
@@ -45,13 +67,21 @@ builder.Services.AddAuthentication(options =>
             ValidateLifetime = true
         };
     });
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add(
+        new AuthorizeFilter(new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build()));
+});
 
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IRefreshTokenService, RefreshTokenService>();
 
 builder.Services.AddControllers();
 
 var app = builder.Build();
+
+app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

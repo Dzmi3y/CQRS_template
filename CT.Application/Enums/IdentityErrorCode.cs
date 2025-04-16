@@ -1,11 +1,11 @@
-﻿namespace CT.Infrastructure.Application.Enums
+﻿namespace CT.Application.Enums;
+
+public enum IdentityErrorCode
 {
-    public enum IdentityErrorCode
-    {
-        RefreshTokenNotExists,
-        RefreshTokenExpired,
-        RefreshTokenInvalidated,
-        RefreshTokenUsed,
-        NoAssociatedUser
-    }
+    RefreshTokenNotExists,
+    RefreshTokenExpired,
+    RefreshTokenInvalidated,
+    RefreshTokenUsed,
+    NoAssociatedUser,
+    PasswordIsWrong
 }

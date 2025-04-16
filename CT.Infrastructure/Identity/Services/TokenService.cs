@@ -2,10 +2,9 @@
 using System.Security.Claims;
 using System.Text;
 using CT.Application.DTOs;
+using CT.Application.Enums;
 using CT.Application.Interfaces.Services;
 using CT.Domain.Entities;
-using CT.Infrastructure.Application.DTOs;
-using CT.Infrastructure.Application.Enums;
 using CT.Infrastructure.Identity.Config;
 using Microsoft.IdentityModel.Tokens;
 
@@ -16,9 +15,10 @@ public class TokenService : ITokenService
     private readonly JwtSettings _jwtSettings;
     private readonly IRefreshTokenService _refreshTokenService;
 
-    public TokenService(JwtSettings jwtSettings)
+    public TokenService(JwtSettings jwtSettings, IRefreshTokenService refreshTokenService)
     {
         _jwtSettings = jwtSettings;
+        _refreshTokenService = refreshTokenService;
     }
 
     public async Task<AuthenticationResultDTO> GenerateAuthenticationResultAsync(User user)

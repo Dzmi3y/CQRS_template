@@ -1,6 +1,25 @@
-@CT.API_HostAddress = http://localhost:5085
+@CT.API_HostAddress = https://localhost:7241
 
 GET {{CT.API_HostAddress}}/Products?count=2
 Accept: application/json
 
 ###
+
+@name login
+
+post {{CT.API_HostAddress}}/Account/SignIn
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email": "test@test.com",
+    "password": "1qaz@WSX"
+}
+
+###
+
+@authToken = {{login.response.body.accessToken}}
+
+GET {{CT.API_HostAddress}}/Account/GetCurrentUserData
+Accept: application/json
+Authorization: Bearer {{authToken}}

@@ -1,11 +1,10 @@
-﻿using CT.Domain.Entities;
-using CT.Infrastructure.Application.DTOs;
+﻿using CT.Application.DTOs;
+using CT.Domain.Entities;
 
-namespace CT.Application.Interfaces.Services
+namespace CT.Application.Interfaces.Services;
+
+public interface ITokenService
 {
-    public interface ITokenService
-    {
-        Task<AuthenticationResultDTO> GenerateAuthenticationResultAsync(User user);
-        Task<AuthenticationResultDTO> GenerateRefreshTokenAsync(Guid refreshToken);
-    }
+    Task<AuthenticationResultDTO> GenerateAuthenticationResultAsync(User user);
+    Task<AuthenticationResultDTO> GenerateRefreshTokenAsync(Guid refreshToken);
 }

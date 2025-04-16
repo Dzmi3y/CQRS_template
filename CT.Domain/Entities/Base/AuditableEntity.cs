@@ -1,11 +1,10 @@
-﻿namespace CT.Domain.Entities.Base
+﻿namespace CT.Domain.Entities.Base;
+
+public abstract class AuditableEntity
 {
-    public abstract class AuditableEntity
-    {
-        public DateTime CreatedDateUtc { get; set; }
-        public DateTime ModifiedDateUtc { get; set; }
-        public string? CreatedBy { get; set; }
-        public string? ModifiedBy { get; set; }
-        public bool IsDeleted { get; set; }
-    }
+    public DateTime CreatedDateUtc { get; set; }
+    public DateTime ModifiedDateUtc { get; set; }
+    public string? CreatedBy { get; set; }
+    public string? ModifiedBy { get; set; }
+    public bool IsDeleted { get; set; }
 }

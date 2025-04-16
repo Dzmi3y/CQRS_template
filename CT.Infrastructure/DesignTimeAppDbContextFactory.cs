@@ -3,23 +3,22 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
-namespace CT.Infrastructure
+namespace CT.Infrastructure;
+
+internal class DesignTimeAppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
 {
-    internal class DesignTimeAppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
+    public AppDbContext CreateDbContext(string[] args)
     {
-        public AppDbContext CreateDbContext(string[] args)
-        {
-            var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+        var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
 
-            var configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
-                .Build();
+        var configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json")
+            .Build();
 
-            optionsBuilder.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
+        optionsBuilder.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
 
 
-            return new AppDbContext(optionsBuilder.Options);
-        }
+        return new AppDbContext(optionsBuilder.Options);
     }
 }

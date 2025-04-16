@@ -1,9 +1,8 @@
-﻿namespace CT.Infrastructure.Identity.Config
+﻿namespace CT.Infrastructure.Identity.Config;
+
+public class JwtSettings
 {
-    public class JwtSettings
-    {
-        public string Secret { get; set; }
-        public TimeSpan AccessTokenLifetime { get; set; }
-        public TimeSpan RefreshTokenLifetime { get; set; }
-    }
+    public string Secret { get; set; }
+    public TimeSpan AccessTokenLifetime { get; set; }
+    public TimeSpan RefreshTokenLifetime { get; set; }
 }

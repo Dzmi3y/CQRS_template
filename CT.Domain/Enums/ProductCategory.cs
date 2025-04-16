@@ -1,8 +1,7 @@
-﻿namespace CT.Domain.Enums
+﻿namespace CT.Domain.Enums;
+
+public enum ProductType
 {
-    public enum ProductType
-    {
-        Individually,
-        Set
-    }
+    Individually,
+    Set
 }

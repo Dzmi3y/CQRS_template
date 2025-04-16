@@ -1,12 +1,11 @@
-﻿using CT.Infrastructure.Application.Enums;
+﻿using CT.Application.Enums;
 
-namespace CT.Infrastructure.Application.DTOs
+namespace CT.Application.DTOs;
+
+public class AuthenticationResultDTO
 {
-    public class AuthenticationResultDTO
-    {
-        public string AccessToken { get; set; } = string.Empty;
-        public Guid RefreshToken { get; set; }
-        public int ExpiresIn { get; set; }
-        public IdentityErrorCode? Error { get; set; }
-    }
+    public string AccessToken { get; set; } = string.Empty;
+    public Guid RefreshToken { get; set; }
+    public int ExpiresIn { get; set; }
+    public IdentityErrorCode? Error { get; set; }
 }

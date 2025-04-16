@@ -1,15 +1,13 @@
-﻿
-using CT.Application.DTOs;
+﻿using CT.Application.DTOs;
 using CT.Domain.Entities;
 
-namespace CT.Application.Interfaces.Services
+namespace CT.Application.Interfaces.Services;
+
+public interface IRefreshTokenService
 {
-    public interface IRefreshTokenService
-    {
-        Task<User?> GetUserByRefreshTokenAsync(Guid refreshToken);
-        Task<RefreshTokenInfoDTO> GetRefreshTokenInfoAsync(Guid token);
-        Task SetAsUsedAsync(Guid token);
-        Task SetAsInvalidatedAsync(Guid token);
-        Task<Guid> CreateRefreshTokenAsync(RefreshTokenInfoDTO tokenInfo);
-    }
+    Task<User?> GetUserByRefreshTokenAsync(Guid refreshToken);
+    Task<RefreshTokenInfoDTO> GetRefreshTokenInfoAsync(Guid token);
+    Task SetAsUsedAsync(Guid token);
+    Task SetAsInvalidatedAsync(Guid token);
+    Task<Guid> CreateRefreshTokenAsync(RefreshTokenInfoDTO tokenInfo);
 }

@@ -1,11 +1,10 @@
-﻿namespace CT.Domain.Enums
+﻿namespace CT.Domain.Enums;
+
+public enum OrderStatus
 {
-    public enum OrderStatus
-    {
-        Pending,
-        Processing,
-        Shipped,
-        Delivered,
-        Cancelled
-    }
+    Pending,
+    Processing,
+    Shipped,
+    Delivered,
+    Cancelled
 }
