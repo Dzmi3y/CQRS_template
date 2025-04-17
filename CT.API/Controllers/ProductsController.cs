@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CT.API.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class ProductsController : ControllerBase
 {
     private readonly IMediator _mediator;

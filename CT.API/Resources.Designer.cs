@@ -70,6 +70,15 @@ namespace CT.API {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid token.
+        /// </summary>
+        internal static string InvalidToken {
+            get {
+                return ResourceManager.GetString("InvalidToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name is required.
         /// </summary>
         internal static string NameIsRequired {
@@ -93,6 +102,15 @@ namespace CT.API {
         internal static string ServerError {
             get {
                 return ResourceManager.GetString("ServerError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully signed out.
+        /// </summary>
+        internal static string SignedOut {
+            get {
+                return ResourceManager.GetString("SignedOut", resourceCulture);
             }
         }
     }

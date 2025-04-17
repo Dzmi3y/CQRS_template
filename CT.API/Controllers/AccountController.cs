@@ -9,7 +9,7 @@ using Microsoft.IdentityModel.JsonWebTokens;
 namespace CT.API.Controllers;
 
 [ApiController]
-[Route("[controller]/[action]")]
+[Route("api/auth")]
 public class AccountController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -19,9 +19,9 @@ public class AccountController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpPost]
+    [HttpPost("login")]
     [AllowAnonymous]
-    public async Task<IActionResult> SignIn([FromBody] SignInRequest request)
+    public async Task<IActionResult> Login([FromBody] SignInRequest request)
     {
         
         if (string.IsNullOrEmpty(request.Email)) return BadRequest(Resources.EmailIsRequired);
@@ -36,19 +36,9 @@ public class AccountController : ControllerBase
         return Ok(productList);
     }
 
-    [HttpGet]
-    public IActionResult GetCurrentUserData()
-    {
-        var userId = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
-        var userName = User.FindFirst(JwtRegisteredClaimNames.Name)?.Value;
-        var userEmail = User.FindFirst(JwtRegisteredClaimNames.Email)?.Value;
-
-        return Ok(new { userId, userName, userEmail });
-    }
-
-    [HttpPost]
+    [HttpPost("register")]
     [AllowAnonymous]
-    public async Task<IActionResult> SignUp([FromBody] SignUpRequest request)
+    public async Task<IActionResult> Register([FromBody] SignUpRequest request)
     {
         if (string.IsNullOrEmpty(request.Email)) return BadRequest(Resources.EmailIsRequired);
 
@@ -56,7 +46,6 @@ public class AccountController : ControllerBase
 
         if (string.IsNullOrEmpty(request.Name)) return BadRequest(Resources.NameIsRequired);
 
-        if (string.IsNullOrEmpty(request.Name)) return BadRequest(Resources.NameIsRequired);
 
         var result = await _mediator.Send(
             new RegisterUserCommand(
@@ -73,5 +62,31 @@ public class AccountController : ControllerBase
 
         return Ok(result);
 
+    }
+
+    [HttpPost("logout")]
+    [Authorize]
+    public async Task<IActionResult> Logout()
+    {
+        var jwtId = User.FindFirst(JwtRegisteredClaimNames.Jti)?.Value;
+
+        if (string.IsNullOrEmpty(jwtId))
+        {
+            return BadRequest(Resources.InvalidToken);
+        }
+
+        await _mediator.Send(new InvalidateRefreshTokenCommand(jwtId));
+
+        return Ok(new { message = Resources.SignedOut});
+    }
+
+    [HttpGet("info")]
+    public IActionResult AccountInfo()
+    {
+        var userId = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
+        var userName = User.FindFirst(JwtRegisteredClaimNames.Name)?.Value;
+        var userEmail = User.FindFirst(JwtRegisteredClaimNames.Email)?.Value;
+
+        return Ok(new { userId, userName, userEmail });
     }
 }

@@ -120,6 +120,9 @@
   <data name="EmailIsRequired" xml:space="preserve">
     <value>Email is required</value>
   </data>
+  <data name="InvalidToken" xml:space="preserve">
+    <value>Invalid token</value>
+  </data>
   <data name="NameIsRequired" xml:space="preserve">
     <value>Name is required</value>
   </data>
@@ -128,5 +131,8 @@
   </data>
   <data name="ServerError" xml:space="preserve">
     <value>An error occurred on the server. Please try again later.</value>
+  </data>
+  <data name="SignedOut" xml:space="preserve">
+    <value>Successfully signed out</value>
   </data>
 </root>

@@ -1,42 +1,38 @@
-@CT.API_HostAddress = https://localhost:7241
+@CT.API_HostAddress = https://localhost:7241/api
 
-GET {{CT.API_HostAddress}}/Products?count=2
+### Get products list
+GET {{CT.API_HostAddress}}/products?count=10
 Accept: application/json
 
-###
-
-@name login
-
-post {{CT.API_HostAddress}}/Account/SignIn
-Accept: application/json
+### Register new user
+POST {{CT.API_HostAddress}}/auth/register
 Content-Type: application/json
 
 {
-    "email": "test@test.com",
-    "password": "1qaz@WSX"
+  "email": "test2@test.com",
+  "password": "1qaz@WSX",
+  "name": "Test User",
+  "defaultPhone": "+1234567890",
+  "defaultAddress": "123 Test Street, Test City"
 }
 
-###
+### User login
+# @name login
+POST {{CT.API_HostAddress}}/auth/login
+Content-Type: application/json
 
-@authToken = {{login.response.body.accessToken}}
+{
+  "email": "test@test.com",
+  "password": "1qaz@WSX"
+}
 
-GET {{CT.API_HostAddress}}/Account/GetCurrentUserData
-Accept: application/json
+### Save token from response
+@authToken = {{login.response.body.$.accessToken}}
+
+### Get user info
+GET {{CT.API_HostAddress}}/auth/info
 Authorization: Bearer {{authToken}}
 
-###
-@name signup
-
-POST {{CT.API_HostAddress}}/Account/SignUp
-Accept: application/json
-Content-Type: application/json
-
-{
-    "email": "test2@test.com",
-    "password": "1qaz@WSX",
-    "name": "Test",
-    "defaultPhone": "+1234567890",
-    "defaultAddress": "123 Main St, City, Country"
-}
-
-###
+### User logout
+POST {{CT.API_HostAddress}}/auth/logout
+Authorization: Bearer {{authToken}}
