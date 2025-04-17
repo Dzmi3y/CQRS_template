@@ -23,3 +23,20 @@ Content-Type: application/json
 GET {{CT.API_HostAddress}}/Account/GetCurrentUserData
 Accept: application/json
 Authorization: Bearer {{authToken}}
+
+###
+@name signup
+
+POST {{CT.API_HostAddress}}/Account/SignUp
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email": "test2@test.com",
+    "password": "1qaz@WSX",
+    "name": "Test",
+    "defaultPhone": "+1234567890",
+    "defaultAddress": "123 Main St, City, Country"
+}
+
+###

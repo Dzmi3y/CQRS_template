@@ -40,7 +40,10 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
     typeof(GetUserByEmailQuery).Assembly,
     typeof(GetUserByEmailHandler).Assembly,
     typeof(AuthenticateUserCommand).Assembly,
-    typeof(AuthenticateUserHandler).Assembly
+    typeof(AuthenticateUserHandler).Assembly,
+    typeof(RegisterUserCommand).Assembly,
+    typeof(RegisterUserHandler).Assembly
+
 ));
 
 JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
@@ -74,6 +77,7 @@ builder.Services.AddControllers(options =>
         new AuthorizeFilter(new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build()));
 });
 
+builder.Services.AddLogging();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IRefreshTokenService, RefreshTokenService>();

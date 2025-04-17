@@ -120,7 +120,13 @@
   <data name="EmailIsRequired" xml:space="preserve">
     <value>Email is required</value>
   </data>
+  <data name="NameIsRequired" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
   <data name="PasswordIsRequired" xml:space="preserve">
     <value>Password is required</value>
+  </data>
+  <data name="ServerError" xml:space="preserve">
+    <value>An error occurred on the server. Please try again later.</value>
   </data>
 </root>

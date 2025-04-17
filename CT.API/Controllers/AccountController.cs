@@ -1,4 +1,5 @@
 ﻿using CT.API.Contracts.Requests;
+using CT.Application.Enums;
 using CT.Application.Users.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -43,5 +44,34 @@ public class AccountController : ControllerBase
         var userEmail = User.FindFirst(JwtRegisteredClaimNames.Email)?.Value;
 
         return Ok(new { userId, userName, userEmail });
+    }
+
+    [HttpPost]
+    [AllowAnonymous]
+    public async Task<IActionResult> SignUp([FromBody] SignUpRequest request)
+    {
+        if (string.IsNullOrEmpty(request.Email)) return BadRequest(Resources.EmailIsRequired);
+
+        if (string.IsNullOrEmpty(request.Password)) return BadRequest(Resources.PasswordIsRequired);
+
+        if (string.IsNullOrEmpty(request.Name)) return BadRequest(Resources.NameIsRequired);
+
+        if (string.IsNullOrEmpty(request.Name)) return BadRequest(Resources.NameIsRequired);
+
+        var result = await _mediator.Send(
+            new RegisterUserCommand(
+                request.Email,
+                request.Password,
+                request.Name,
+                request.DefaultPhone,
+                request.DefaultAddress));
+
+        if(result.Error == RegistrationErrorCode.DatabaseError)
+            return StatusCode(StatusCodes.Status500InternalServerError, Resources.ServerError);
+
+        if (result.Error != null) return BadRequest(result.Error.ToString());
+
+        return Ok(result);
+
     }
 }

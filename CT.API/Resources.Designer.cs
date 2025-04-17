@@ -70,11 +70,29 @@ namespace CT.API {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name is required.
+        /// </summary>
+        internal static string NameIsRequired {
+            get {
+                return ResourceManager.GetString("NameIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password is required.
         /// </summary>
         internal static string PasswordIsRequired {
             get {
                 return ResourceManager.GetString("PasswordIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred on the server. Please try again later..
+        /// </summary>
+        internal static string ServerError {
+            get {
+                return ResourceManager.GetString("ServerError", resourceCulture);
             }
         }
     }
