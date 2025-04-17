@@ -22,9 +22,10 @@ public class AccountController : ControllerBase
     [AllowAnonymous]
     public async Task<IActionResult> SignIn([FromBody] SignInRequest request)
     {
-        if (string.IsNullOrEmpty(request.Email)) return BadRequest("Email is required");
+        
+        if (string.IsNullOrEmpty(request.Email)) return BadRequest(Resources.EmailIsRequired);
 
-        if (string.IsNullOrEmpty(request.Password)) return BadRequest("Password is required");
+        if (string.IsNullOrEmpty(request.Password)) return BadRequest(Resources.PasswordIsRequired);
 
         var productList =
             await _mediator.Send(
