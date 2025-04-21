@@ -88,11 +88,29 @@ namespace CT.API {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Order list cannot be empty.
+        /// </summary>
+        internal static string OrderListCannotBeEmpty {
+            get {
+                return ResourceManager.GetString("OrderListCannotBeEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password is required.
         /// </summary>
         internal static string PasswordIsRequired {
             get {
                 return ResourceManager.GetString("PasswordIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Request cannot be null.
+        /// </summary>
+        internal static string RequestCannotBeNull {
+            get {
+                return ResourceManager.GetString("RequestCannotBeNull", resourceCulture);
             }
         }
         

@@ -3,7 +3,6 @@ using CT.Application.Products.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Diagnostics;
 
 namespace CT.API.Controllers;
 
@@ -21,7 +20,6 @@ public class ProductsController : ControllerBase
     [HttpGet]
     [AllowAnonymous]
     public async Task<IActionResult> Get(GetProductsRequest request)
-
     {
         var productList = await _mediator.Send(new GetProductListQuery(request.Count, request.IsSet));
 

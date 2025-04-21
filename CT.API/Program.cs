@@ -1,8 +1,9 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
-using System.Resources;
 using System.Text;
 using CT.Application.Interfaces;
 using CT.Application.Interfaces.Services;
+using CT.Application.Orders.Commands;
+using CT.Application.Orders.Handlers;
 using CT.Application.Products.Handlers;
 using CT.Application.Products.Queries;
 using CT.Application.Users.Commands;
@@ -44,7 +45,9 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
     typeof(RegisterUserCommand).Assembly,
     typeof(RegisterUserHandler).Assembly,
     typeof(InvalidateRefreshTokenCommand).Assembly,
-    typeof(InvalidateRefreshTokenHandler).Assembly
+    typeof(InvalidateRefreshTokenHandler).Assembly,
+    typeof(CreateOrderCommand).Assembly,
+    typeof(CreateOrderHandler).Assembly
 ));
 
 JwtSecurityTokenHandler.DefaultMapInboundClaims = false;

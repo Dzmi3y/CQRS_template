@@ -126,8 +126,14 @@
   <data name="NameIsRequired" xml:space="preserve">
     <value>Name is required</value>
   </data>
+  <data name="OrderListCannotBeEmpty" xml:space="preserve">
+    <value>Order list cannot be empty</value>
+  </data>
   <data name="PasswordIsRequired" xml:space="preserve">
     <value>Password is required</value>
+  </data>
+  <data name="RequestCannotBeNull" xml:space="preserve">
+    <value>Request cannot be null</value>
   </data>
   <data name="ServerError" xml:space="preserve">
     <value>An error occurred on the server. Please try again later.</value>
