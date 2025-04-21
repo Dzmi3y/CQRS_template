@@ -23,7 +23,7 @@ public class ProductsController : ControllerBase
     public async Task<IActionResult> Get(GetProductsRequest request)
 
     {
-        var productList = await _mediator.Send(new GetProductListQuery(request.Count));
+        var productList = await _mediator.Send(new GetProductListQuery(request.Count, request.IsSet));
 
         return Ok(productList);
     }
