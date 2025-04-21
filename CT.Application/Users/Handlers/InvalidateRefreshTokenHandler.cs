@@ -33,10 +33,7 @@ public class InvalidateRefreshTokenHandler : IRequestHandler<InvalidateRefreshTo
                 return false;
             }
 
-            foreach (var token in refreshTokens)
-            {
-                token.Invalidated = true;
-            }
+            foreach (var token in refreshTokens) token.Invalidated = true;
 
             var saveResult = await _appDbContext.SaveChangesAsync(cancellationToken);
 

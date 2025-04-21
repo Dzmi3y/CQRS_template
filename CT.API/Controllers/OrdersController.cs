@@ -1,5 +1,6 @@
 ﻿using CT.API.Contracts.Requests;
 using CT.Application.Orders.Commands;
+using CT.Application.Orders.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.JsonWebTokens;
@@ -27,6 +28,15 @@ public class OrdersController : ControllerBase
 
         var userId = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
         var result = await _mediator.Send(new CreateOrderCommand(userId, request.OrderList));
+
+        return result.Error == null ? BadRequest(result) : Ok(result);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Get()
+    {
+        var userId = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
+        var result = await _mediator.Send(new GetOrdersQuery(userId));
 
         return Ok(result);
     }

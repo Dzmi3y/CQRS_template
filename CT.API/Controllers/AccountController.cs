@@ -23,7 +23,6 @@ public class AccountController : ControllerBase
     [AllowAnonymous]
     public async Task<IActionResult> Login([FromBody] SignInRequest request)
     {
-        
         if (string.IsNullOrEmpty(request.Email)) return BadRequest(Resources.EmailIsRequired);
 
         if (string.IsNullOrEmpty(request.Password)) return BadRequest(Resources.PasswordIsRequired);
@@ -55,13 +54,12 @@ public class AccountController : ControllerBase
                 request.DefaultPhone,
                 request.DefaultAddress));
 
-        if(result.Error == RegistrationErrorCode.DatabaseError)
+        if (result.Error == RegistrationErrorCode.DatabaseError)
             return StatusCode(StatusCodes.Status500InternalServerError, Resources.ServerError);
 
         if (result.Error != null) return BadRequest(result.Error.ToString());
 
         return Ok(result);
-
     }
 
     [HttpPost("logout")]
@@ -70,14 +68,11 @@ public class AccountController : ControllerBase
     {
         var jwtId = User.FindFirst(JwtRegisteredClaimNames.Jti)?.Value;
 
-        if (string.IsNullOrEmpty(jwtId))
-        {
-            return BadRequest(Resources.InvalidToken);
-        }
+        if (string.IsNullOrEmpty(jwtId)) return BadRequest(Resources.InvalidToken);
 
         await _mediator.Send(new InvalidateRefreshTokenCommand(jwtId));
 
-        return Ok(new { message = Resources.SignedOut});
+        return Ok(new { message = Resources.SignedOut });
     }
 
     [HttpGet("info")]

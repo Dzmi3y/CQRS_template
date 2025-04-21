@@ -1,8 +1,7 @@
-﻿namespace CT.Application.Enums
+﻿namespace CT.Application.Enums;
+
+public enum RegistrationErrorCode
 {
-    public enum RegistrationErrorCode
-    {
-        UserAlreadyExists,
-        DatabaseError
-    }
+    UserAlreadyExists,
+    DatabaseError
 }

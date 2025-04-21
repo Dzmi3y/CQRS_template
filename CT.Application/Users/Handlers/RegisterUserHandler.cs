@@ -13,10 +13,11 @@ namespace CT.Application.Users.Handlers;
 
 public class RegisterUserHandler : IRequestHandler<RegisterUserCommand, RegistrationResultDTO>
 {
-    private readonly IMediator _mediator;
-    private readonly IPasswordHasher<User> _passwordHasher;
     private readonly IAppDbContext _appDbContext;
     private readonly ILogger<RegisterUserHandler> _logger;
+    private readonly IMediator _mediator;
+    private readonly IPasswordHasher<User> _passwordHasher;
+
     public RegisterUserHandler(
         ITokenService tokenService,
         IPasswordHasher<User> passwordHasher,
@@ -37,7 +38,7 @@ public class RegisterUserHandler : IRequestHandler<RegisterUserCommand, Registra
         if (existingUser != null)
             return new RegistrationResultDTO { Error = RegistrationErrorCode.UserAlreadyExists };
 
-        Guid userId = Guid.NewGuid();
+        var userId = Guid.NewGuid();
         var user = new User
         {
             Id = userId,
@@ -60,6 +61,7 @@ public class RegisterUserHandler : IRequestHandler<RegisterUserCommand, Registra
             _logger.LogError($"Failed to save user {user.Email} to the database");
             return new RegistrationResultDTO { Error = RegistrationErrorCode.DatabaseError };
         }
+
         return new RegistrationResultDTO { UserId = userId };
     }
 }

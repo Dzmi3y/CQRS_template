@@ -1,9 +1,8 @@
 ﻿using CT.Application.DTOs;
 
-namespace CT.API.Contracts.Requests
+namespace CT.API.Contracts.Requests;
+
+public class CreateOrderRequest
 {
-    public class CreateOrderRequest
-    {
-        public List<ShortOrderItemDTO>? OrderList { get; set; }
-    }
+    public List<ShortOrderItemDTO>? OrderList { get; set; }
 }

@@ -1,8 +1,7 @@
-﻿namespace CT.API.Contracts.Requests
+﻿namespace CT.API.Contracts.Requests;
+
+public class GetProductsRequest
 {
-    public class GetProductsRequest
-    {
-        public int Count { get; set; }
-        public bool? IsSet { get; set; }
-    }
+    public int Count { get; set; }
+    public bool? IsSet { get; set; }
 }
