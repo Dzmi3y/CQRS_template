@@ -1,6 +1,7 @@
 ﻿using CT.Application.Interfaces;
 using CT.Application.Products.Queries;
 using CT.Domain.Entities;
+using CT.Domain.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,9 +18,17 @@ public class GetProductListHandler : IRequestHandler<GetProductListQuery, List<P
 
     public async Task<List<Product>> Handle(GetProductListQuery request, CancellationToken cancellationToken)
     {
-        return await _appDbContext.Products
+        var result = _appDbContext.Products
             .AsNoTracking()
-            .Take(request.Count)
-            .ToListAsync(cancellationToken);
+            .Take(request.Count);
+
+        if (request.IsSet != null)
+        {
+            var type = (bool)request.IsSet ? ProductType.Set : ProductType.Individually;
+            return await result.Where(x => x.Type == type)
+                .ToListAsync(cancellationToken);
+        }
+
+        return await result.ToListAsync(cancellationToken);
     }
 }
