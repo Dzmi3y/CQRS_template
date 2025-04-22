@@ -1,19 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="MediatR" Version="12.5.0" />
-    <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.4" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="9.0.4" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="MediatR" Version="12.5.0"/>
+        <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.4"/>
+        <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="9.0.4"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\CT.Domain\CT.Domain.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\CT.Domain\CT.Domain.csproj"/>
+    </ItemGroup>
 
 </Project>
