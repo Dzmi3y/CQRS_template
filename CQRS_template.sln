@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CT.Domain", "CT.Domain\CT.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CT.Infrastructure", "CT.Infrastructure\CT.Infrastructure.csproj", "{0998C27C-B460-4B19-894A-7B7A459F75EF}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "CT.UI", "CT.UI\CT.UI.esproj", "{78B87C24-F572-A879-D402-AE0F180F3A15}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,12 @@ Global
 		{0998C27C-B460-4B19-894A-7B7A459F75EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0998C27C-B460-4B19-894A-7B7A459F75EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0998C27C-B460-4B19-894A-7B7A459F75EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78B87C24-F572-A879-D402-AE0F180F3A15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78B87C24-F572-A879-D402-AE0F180F3A15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78B87C24-F572-A879-D402-AE0F180F3A15}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{78B87C24-F572-A879-D402-AE0F180F3A15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78B87C24-F572-A879-D402-AE0F180F3A15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78B87C24-F572-A879-D402-AE0F180F3A15}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
