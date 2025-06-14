@@ -1,0 +1,13 @@
+.container {
+  height: 925px;
+  background: var(--gradient-to-bottom);
+  position: relative;
+}
+
+.bottomWave {
+  position: absolute;
+  height: 193px;
+  width: 100vw;
+  bottom: 0px;
+  background-image: url("/images/decorations/Bottom_wave.svg");
+}
