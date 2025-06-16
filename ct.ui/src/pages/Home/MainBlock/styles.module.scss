@@ -1,7 +1,12 @@
+@import '../../../_breakpoints.scss';
+
 .container {
   height: 925px;
   background: var(--gradient-to-bottom);
   position: relative;
+  @include media(xl) {
+    //test
+  }
 }
 
 .bottomWave {

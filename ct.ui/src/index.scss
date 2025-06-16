@@ -1,4 +1,6 @@
 @import-normalize;
+@import './_breakpoints.scss';
+
 
 @font-face {
   font-family: CormorantGaramond-Bold;
@@ -9,6 +11,8 @@
   font-family: OpenSans-Regular;
   src: url(./assets/fonts/OpenSans-Regular.ttf);
 }
+
+
 
 :root {
   --text-size-small: 16px;
