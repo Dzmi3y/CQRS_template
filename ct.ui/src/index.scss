@@ -1,5 +1,5 @@
 @import-normalize;
-@import './_breakpoints.scss';
+@import '@mixins/_breakpoints.scss';
 
 
 @font-face {
@@ -12,17 +12,9 @@
   src: url(./assets/fonts/OpenSans-Regular.ttf);
 }
 
-
-
 :root {
-  --text-size-small: 16px;
-  --text-size-medium: 18px;
-  --text-size-large: 24px;
-  --text-size-extra-large: 42px;
-  --text-size-huge-mobil: 80px;
-  --text-size-huge: 100px;
-  --text-size-extra-huge-mobil: 120px;
-  --text-size-extra-huge: 226.45px;
+  --side-margin: clamp(1px, 5vw, 75px);
+  --font-size-biggest: clamp(16px, calc(1rem + 3.06vw), 60px);
 
   --color-primary: #ffffff;
   --color-secondary: #000000;

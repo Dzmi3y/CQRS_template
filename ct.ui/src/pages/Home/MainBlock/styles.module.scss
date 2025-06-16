@@ -1,18 +1,31 @@
-@import '../../../_breakpoints.scss';
+@import '@mixins/_breakpoints.scss';
 
 .container {
   height: 925px;
   background: var(--gradient-to-bottom);
   position: relative;
-  @include media(xl) {
-    //test
+  *:not(.bottomWave) {
+    margin-left: var(--side-margin);
+    margin-right: var(--side-margin);
+     @include media(lg) { 
+       margin-right: var(--side-margin);
+     }
   }
+  
+}
+
+.welcomeText {
+  font-family: var(--bold-font);
+  font-size: var(--font-size-biggest);
+  text-transform: uppercase;
+  text-align: center;
+  padding-top: 20px;
 }
 
 .bottomWave {
   position: absolute;
-  height: 193px;
-  width: 100vw;
   bottom: 0px;
-  background-image: url("/images/decorations/Bottom_wave.svg");
+  width: 100vw;
+  height: auto; 
+  object-fit: fill;
 }
