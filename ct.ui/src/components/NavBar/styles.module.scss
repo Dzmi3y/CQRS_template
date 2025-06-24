@@ -1,0 +1,86 @@
+.container{
+  margin-top: 10px;
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  left: var(--side-margin);
+  right: var(--side-margin);
+}
+
+.logoBlock{
+  margin-top: auto;
+  display: flex;
+  gap: 10px
+}
+
+.logoImage{
+ width: 47px;
+ height: 47px;
+}
+
+.logoText{
+  margin-top: auto;
+  margin-bottom: 10px;
+  font-size: var(--font-size-30);
+}
+
+.navBlock{
+  display: flex;
+  margin-top: auto;
+  gap: var(--gap-size-60);
+}
+
+.navItem{
+  margin-top: auto;
+  margin-bottom: 10px;
+  font-size: var(--font-size-20);
+  cursor: pointer;
+  transition: transform 0.1s ease-in-out;
+  
+  &:hover{
+    transform: scale(1.05);
+  }
+  &:active{
+    transform: scale(0.9);
+  }
+}
+
+.phoneImage{
+  width: 19px;
+  height: 21px;
+  margin-right: 5px;
+}
+
+.bagImage{
+  width: 59px;
+  height: 59px;
+  transition: transform 0.2s ease-in-out;
+}
+
+a{
+  font-family: var(--regular-font);
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+
+.orderButton{
+  cursor: pointer;
+  background: none;
+  border: none;
+  img{
+    transition: transform 0.2s ease-in-out;
+  }
+  &:hover{
+    img{
+      transform: scale(1.05);
+    }
+  }
+  &:active{
+    img{
+      transform: scale(0.9);
+    }
+  }
+}
+

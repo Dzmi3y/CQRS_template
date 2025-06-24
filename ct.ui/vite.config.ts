@@ -12,6 +12,7 @@ export default defineConfig({
     alias: {
       "@mixins": path.resolve(__dirname, "src/mixins"),
       "@images": path.resolve(__dirname, "src/assets/images"),
+      "@components": path.resolve(__dirname, "src/components"),
     },
   },
 });

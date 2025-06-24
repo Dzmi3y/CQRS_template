@@ -1,9 +1,13 @@
 import MainBlock from "./MainBlock/MainBlock";
+import NavBar from "../../components/NavBar/NavBar";
 
 const HomePage = () => {
   return (
     <>
-      <MainBlock />
+      <NavBar />
+      <div id="home">
+        <MainBlock />
+      </div>
     </>
   );
 };

@@ -1,4 +1,4 @@
-@import '@mixins/_breakpoints.scss';
+//@import '@mixins/_breakpoints.scss';
 
 .container {
   height: 925px;
@@ -7,19 +7,19 @@
   *:not(.bottomWave) {
     margin-left: var(--side-margin);
     margin-right: var(--side-margin);
-     @include media(lg) { 
-       margin-right: var(--side-margin);
-     }
+    //  @include media(lg) { 
+    //    margin-right: var(--side-margin);
+    //  }
   }
   
 }
 
 .welcomeText {
   font-family: var(--bold-font);
-  font-size: var(--font-size-biggest);
+  font-size: var(--font-size-60);
   text-transform: uppercase;
   text-align: center;
-  padding-top: 20px;
+  padding-top: 100px;
 }
 
 .bottomWave {
