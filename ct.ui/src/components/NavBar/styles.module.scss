@@ -1,3 +1,5 @@
+@import '@mixins/_breakpoints.scss';
+
 @keyframes fadeDownIn {
   from {
     transform: translateY(-100%);
@@ -13,12 +15,11 @@
   justify-content: space-between;
   padding-left: var(--side-margin);
   padding-right: var(--side-margin);
-  padding-top: 5px;
+  padding-top: 10px;
   padding-bottom: 10px;
   left: 0px;
   right: 0px;
 }
-
 
 .fixed{
   position: fixed;
@@ -47,10 +48,56 @@
   font-size: var(--font-size-30);
 }
 
-.navBlock{
+.navBlockDesktop{
   display: flex;
   margin-top: auto;
   gap: var(--gap-size-60);
+
+  @include media(md) { 
+    display: none!important;
+  }
+
+}
+
+.navBlockMobile{
+  display: none;
+  margin-top: auto;
+  gap: var(--gap-size-60);
+
+  @include media(md) { 
+    display: flex!important;
+  }
+}
+
+.mobileNavItems{
+  text-align: right;
+  position: absolute;
+  flex-direction: column;
+  background-color: var(--color-accent-blue);
+  top: 100%;
+  right: 0px;
+  gap: 10px;
+  display: flex;
+
+  padding-left: calc( var(--side-margin) + 10px);
+  padding-right: calc( var(--side-margin) + 10px);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 0px 0px 0px 20%;
+
+  overflow: hidden;
+  transition: max-height 0.4s ease-out, opacity 0.3s ease-out;
+}
+
+.showNav {
+  max-height: 300px;
+  opacity: 1;
+}
+
+.hideNav {
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .navItem{
@@ -75,8 +122,8 @@
 }
 
 .bagImage{
-  width: 59px;
-  height: 59px;
+  width: 40px;
+  height: 40px;
   transition: transform 0.2s ease-in-out;
 }
 

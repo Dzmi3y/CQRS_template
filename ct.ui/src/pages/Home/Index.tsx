@@ -8,13 +8,13 @@ const HomePage = () => {
       <div id="home">
         <MainBlock />
       </div>
-      <div id="home2">
+      <div id="about">
         <MainBlock />
       </div>
-      <div id="home3">
+      <div id="menu">
         <MainBlock />
       </div>
-      <div id="home4">
+      <div id="contact">
         <MainBlock />
       </div>
     </>
