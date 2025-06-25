@@ -1,11 +1,33 @@
+@keyframes fadeDownIn {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
 .container{
-  margin-top: 10px;
-  position: absolute;
   z-index: 1;
   display: flex;
   justify-content: space-between;
-  left: var(--side-margin);
-  right: var(--side-margin);
+  padding-left: var(--side-margin);
+  padding-right: var(--side-margin);
+  padding-top: 5px;
+  padding-bottom: 10px;
+  left: 0px;
+  right: 0px;
+}
+
+
+.fixed{
+  position: fixed;
+  background-color: var(--color-accent-blue);
+  animation: fadeDownIn 0.3s ease-out forwards;
+}
+
+.absolute{
+  position: absolute;
 }
 
 .logoBlock{

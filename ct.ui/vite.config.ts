@@ -13,6 +13,7 @@ export default defineConfig({
       "@mixins": path.resolve(__dirname, "src/mixins"),
       "@images": path.resolve(__dirname, "src/assets/images"),
       "@components": path.resolve(__dirname, "src/components"),
+      "@hooks": path.resolve(__dirname, "src/hooks"),
     },
   },
 });

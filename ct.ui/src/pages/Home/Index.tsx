@@ -8,6 +8,15 @@ const HomePage = () => {
       <div id="home">
         <MainBlock />
       </div>
+      <div id="home2">
+        <MainBlock />
+      </div>
+      <div id="home3">
+        <MainBlock />
+      </div>
+      <div id="home4">
+        <MainBlock />
+      </div>
     </>
   );
 };

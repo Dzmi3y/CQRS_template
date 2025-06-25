@@ -2,10 +2,29 @@ import styles from "./styles.module.scss";
 import BagImage from "@images/menu/bag.png";
 import PhoneImage from "@images/menu/phone.png";
 import MacaronImage from "@images/Macaron_Icon.png";
+import useScrollUp from "@hooks/useScrollUp";
+import useScrollDown from "@hooks/useScrollDown";
+import { useState } from "react";
 
 const NavBar = () => {
+  const [attachmentStyle, setAttachmentStyle] = useState<string>(
+    styles.absolute
+  );
+
+  useScrollUp(() => {
+    if (attachmentStyle === styles.absolute) {
+      setAttachmentStyle(styles.fixed);
+    }
+  });
+
+  useScrollDown(() => {
+    if (attachmentStyle === styles.fixed) {
+      setAttachmentStyle(styles.absolute);
+    }
+  });
+
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${attachmentStyle}`}>
       <div className={styles.logoBlock}>
         <img
           className={styles.logoImage}
