@@ -1,7 +1,7 @@
 //@import '@mixins/_breakpoints.scss';
 
 .container {
-  height: 925px;
+  height: clamp(500px, 60vw, 925px);
   background: var(--gradient-to-bottom);
   position: relative;
   *:not(.bottomWave) {
@@ -14,17 +14,42 @@
   
 }
 
+.plainText{
+  text-align: center;
+  font-size: var(--font-size-22);
+  margin-left: var(--side-margin);
+  margin-right: var(--side-margin);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  display: flex;
+  justify-content: center;
+  p{
+    max-width: 50vw;
+  }
+}
+
+.mainMacaron{
+  position: absolute;
+  left: 48%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 40vw;
+  max-width: 619px;
+  height: auto;
+}
+
 .welcomeText {
   font-family: var(--bold-font);
   font-size: var(--font-size-60);
   text-transform: uppercase;
   text-align: center;
-  padding-top: 100px;
+  padding-top: clamp(100px, 10vw, 230px);
 }
 
 .bottomWave {
   position: absolute;
   bottom: 0px;
+  left: 0px;
   width: 100vw;
   height: auto; 
   object-fit: fill;
