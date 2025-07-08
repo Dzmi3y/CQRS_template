@@ -1,0 +1,48 @@
+@import '@mixins/_breakpoints.scss';
+  .container {
+    background: var(--color-primary);
+    position: relative;
+    > *:not(.bottomWave) {
+      margin-left: var(--side-margin);
+      margin-right: var(--side-margin);
+    }
+    margin-bottom: 20px;
+  }
+  
+  .plainText{
+    text-align: center;
+    color: var(--color-neutral-gray);
+    font-size: var(--font-size-22);
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    display: flex;
+    justify-content: center;
+    p{
+      max-width: 50vw;
+    }
+  }
+
+  .titleText {
+    font-family: var(--bold-font);
+    color: var(--color-secondary);
+    font-size: var(--font-size-35);
+    text-transform: uppercase;
+    text-align: center;
+    padding-top: clamp(17.4px, 1.739vw, 40px);
+  }
+  
+  .infoCardContainer {
+    margin-top: clamp(47px, calc(3.38rem + 0.44vw), 54px);
+    display: flex;
+    justify-content: space-between;
+    gap: clamp(47px, calc(3.38rem + 0.44vw), 54px);
+
+    @include media(md) { 
+      flex-direction: column;
+      justify-content: start;
+    }
+
+
+  }
+  
+  
