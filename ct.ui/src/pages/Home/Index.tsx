@@ -1,6 +1,7 @@
 import MainBlock from "./MainBlock/MainBlock";
 import NavBar from "../../components/NavBar/NavBar";
 import AboutBlock from "./AboutBlock/AboutBlock";
+import MenuBlock from "./MenuBlock/MenuBlock";
 
 const HomePage = () => {
   return (
@@ -12,7 +13,9 @@ const HomePage = () => {
       <section id="about">
         <AboutBlock />
       </section>
-      <section id="menu"></section>
+      <section id="menu">
+        <MenuBlock />
+      </section>
       <section id="contact"></section>
     </main>
   );

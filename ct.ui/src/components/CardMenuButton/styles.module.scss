@@ -1,0 +1,23 @@
+.button{
+    width: clamp(60px, 6.56vw, 105px);
+    height: clamp(24px, 2.31vw, 37px);
+    font-weight: 600;
+    font-size: var(--font-size-16);
+    color: var(--color-secondary);
+    background: rgba(251, 194, 235, 0.35);
+    border-radius: 50px; 
+    cursor: pointer;
+    padding: 0px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.1s ease-in-out;
+    
+    &:hover{
+      transform: scale(1.05);
+    }
+    &:active{
+      transform: scale(0.9);
+    }
+}

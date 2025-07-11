@@ -1,0 +1,51 @@
+.container{
+    background: var(--color-primary);
+    color: var(--color-secondary);
+    border-radius: 35px;
+    width: clamp(260px, 22.7vw, 363px);
+    height: clamp(360px, 32.5vw, 520px);
+    padding: 0px;
+    text-align: center;
+    transition: transform 0.1s ease-in-out;
+    &:hover{
+      transform: scale(1.05);
+    }
+    >*{
+        padding-left: var(--font-size-20);
+        padding-right: var(--font-size-20);
+    }
+
+
+}
+
+.image{
+
+}
+
+.title{
+    background: rgba(251, 194, 235, 0.35);
+    height: clamp(60px, 6.4vw, 102px);
+    font-family: var(--bold-font);
+    font-size: var(--font-size-22);
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p{
+      max-width: clamp(180px, 20.56vw, 329px);
+    }
+
+}
+
+.price{
+  font-size: var(--font-size-20);
+  font-weight: 600;
+}
+
+.bottomContainer{
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ height: clamp(55px, 6.2vw, 99px);
+
+}
