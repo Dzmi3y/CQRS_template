@@ -1,26 +1,30 @@
 .container{
-    background: var(--color-primary);
-    color: var(--color-secondary);
-    border-radius: 35px;
-    width: clamp(260px, 22.7vw, 363px);
-    height: clamp(360px, 32.5vw, 520px);
-    padding: 0px;
-    text-align: center;
-    transition: transform 0.1s ease-in-out;
-    &:hover{
-      transform: scale(1.05);
-    }
-    >*{
-        padding-left: var(--font-size-20);
-        padding-right: var(--font-size-20);
-    }
+    scroll-snap-align: start;
+    user-select: none;
+    padding: 10px;
+}
 
-
+.card{
+  background: var(--color-primary);
+  color: var(--color-secondary);
+  border-radius: 35px;
+  width: clamp(260px, 22.7vw, 363px);
+  height: clamp(360px, 32.5vw, 520px);
+  padding: 0px;
+  text-align: center;
+  box-shadow: none;
+  transition: box-shadow 0.3s ease;
+  &:hover{
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  }
+  >*{
+      padding-left: var(--font-size-20);
+      padding-right: var(--font-size-20);
+  }
 }
 
 .image{
   width: clamp(163px, 14.25vw, 228px);
-  ;
 }
 
 .title{
@@ -35,7 +39,6 @@
     p{
       max-width: clamp(180px, 20.56vw, 329px);
     }
-
 }
 
 .price{

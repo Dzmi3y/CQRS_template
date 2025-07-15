@@ -1,0 +1,35 @@
+.container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.productContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: clamp(30px, calc(1rem + 3.27vw), 64px);
+    padding: 30px 10px;
+    min-width: max-content;
+}
+
+.slider{
+    overflow-x: scroll;
+    margin: 0px 10px;
+
+    scrollbar-width: none;       
+    -ms-overflow-style: none;  
+    &::-webkit-scrollbar {
+        display: none;             
+      }
+
+    scroll-behavior: smooth;
+    scroll-snap-type: x proximity;
+}
+
+.dotNavigation{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(11px, 1.25vw, 15px);
+}

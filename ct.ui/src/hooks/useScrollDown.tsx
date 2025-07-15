@@ -9,7 +9,7 @@ const useScrollDown = (onScrollDown: () => void) => {
         window.pageYOffset || document.documentElement.scrollTop;
 
       if (scrollTop > lastScrollTop.current) {
-        onScrollDown(); // Действие при прокрутке вниз
+        onScrollDown();
       }
 
       lastScrollTop.current = scrollTop <= 0 ? 0 : scrollTop;

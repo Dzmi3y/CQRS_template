@@ -5,7 +5,7 @@ import PhoneImage from "@images/menu/phone.png";
 import MacaronImage from "@images/Macaron_Icon.png";
 import useScrollUp from "@hooks/useScrollUp";
 import useScrollDown from "@hooks/useScrollDown";
-import BurgerButton from "../BurgerButton/BurgerButton";
+import BurgerButton from "../Buttons/BurgerButton/BurgerButton";
 
 const NavBar = () => {
   const [isFixed, setIsFixed] = useState(false);
