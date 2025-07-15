@@ -19,7 +19,8 @@
 }
 
 .image{
-
+  width: clamp(163px, 14.25vw, 228px);
+  ;
 }
 
 .title{
@@ -46,6 +47,6 @@
  display: flex;
  justify-content: space-between;
  align-items: center;
+ margin-top: 5px;
  height: clamp(55px, 6.2vw, 99px);
-
 }
