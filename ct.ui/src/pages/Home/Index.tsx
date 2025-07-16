@@ -2,6 +2,7 @@ import MainBlock from "./MainBlock/MainBlock";
 import NavBar from "../../components/NavBar/NavBar";
 import AboutBlock from "./AboutBlock/AboutBlock";
 import MenuBlock from "./MenuBlock/MenuBlock";
+import SetsBlock from "./SetsBlock/SetsBlock";
 
 const HomePage = () => {
   return (
@@ -15,6 +16,7 @@ const HomePage = () => {
       </section>
       <section id="menu">
         <MenuBlock />
+        <SetsBlock />
       </section>
       <section id="contact"></section>
     </main>
