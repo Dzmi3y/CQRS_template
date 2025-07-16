@@ -17,6 +17,7 @@ const MenuCard: React.FC<Props> = ({ imageSrc, title, price, onClick }) => {
           draggable={false}
           src={imageSrc}
           alt={title}
+          loading="lazy"
         />
         <div className={styles.title}>
           <p>{title}</p>
