@@ -4,6 +4,7 @@ import AboutBlock from "./AboutBlock/AboutBlock";
 import MenuBlock from "./MenuBlock/MenuBlock";
 import SetsBlock from "./SetsBlock/SetsBlock";
 import ContactBlock from "./ContactBlock/ContactBlock";
+import Footer from "@components/Footer/Footer";
 
 const HomePage = () => {
   return (
@@ -22,7 +23,9 @@ const HomePage = () => {
       <section id="contact">
         <ContactBlock />
       </section>
-      <section id="contact"></section>
+      <footer>
+        <Footer />
+      </footer>
     </main>
   );
 };

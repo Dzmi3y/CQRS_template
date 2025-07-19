@@ -10,7 +10,7 @@
   
   .bottomWave {
     position: absolute;
-    bottom: 0px;
+    bottom: -1px;
     left: 0px;
     width: 100vw;
     height: auto; 
@@ -19,7 +19,7 @@
 
   .topWave {
     position: absolute;
-    top: 0px;
+    top: -1px;
     transform: rotate(180deg);
     left: 0px;
     width: 100vw;

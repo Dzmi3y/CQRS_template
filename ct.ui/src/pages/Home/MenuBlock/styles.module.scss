@@ -10,7 +10,7 @@
   
   .bottomWave {
     position: absolute;
-    bottom: 0px;
+    bottom: -1px;
     left: 0px;
     width: 100vw;
     height: auto; 
@@ -19,7 +19,7 @@
 
   .topWave {
     position: absolute;
-    top: 0px;
+    top: -1px;
     transform: rotate(180deg);
     left: 0px;
     width: 100vw;
@@ -41,8 +41,7 @@
   }
 
   .titleText {
-   padding-top: clamp(70px, 15vw, 345px);
-  
+    padding-top: clamp(70px, 15vw, 345px);
     font-family: var(--bold-font);
     color: var(--color-primary);
     font-size: var(--font-size-35);
