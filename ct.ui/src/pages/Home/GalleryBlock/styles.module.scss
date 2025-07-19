@@ -1,0 +1,80 @@
+@import '@mixins/_breakpoints.scss';
+  .container {
+    background: var(--color-primary);
+    position: relative;
+    > *:not(.bottomWave) {
+      margin-left: var(--side-margin);
+      margin-right: var(--side-margin);
+    }
+    margin-bottom: 20px;
+  }
+  
+  .plainText{
+    text-align: center;
+    color: var(--color-neutral-gray);
+    font-size: var(--font-size-22);
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    display: flex;
+    justify-content: center;
+  }
+
+  .titleContainer{
+    position: relative;
+    z-index: 3;
+  }
+
+  .titleText {
+    font-family: var(--bold-font);
+    color: var(--color-secondary);
+    font-size: var(--font-size-35);
+    text-transform: uppercase;
+    text-align: center;
+    padding-top: clamp(17.4px, 1.739vw, 40px);
+  }
+  
+  .galleryContainer{
+    position: relative;
+  }
+
+  .photoContainer{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    @include media(md) { 
+      display: block;
+      text-align: center;
+      img{
+        margin-bottom: 10px;
+        border-radius: 50px;
+      }
+    }
+  }
+
+  .image{
+    flex: 1 1 calc(33.333% - 8px);
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .topEllipse{
+    z-index: 1;
+    position: absolute;
+    width: 100vw;
+    top: -49px;
+    height: 98px;
+    @include media(md) { 
+      display: none!important;
+    }
+  }
+
+  .bottomEllipse{
+    position: absolute;
+    width: 100vw;
+    bottom: -49px;
+    height: 98px;
+    @include media(md) { 
+      display: none!important;
+    }
+  }
