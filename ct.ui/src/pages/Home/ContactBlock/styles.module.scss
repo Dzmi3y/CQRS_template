@@ -1,0 +1,80 @@
+@import '@mixins/_breakpoints.scss';
+  .container {
+    background: var(--color-primary);
+    position: relative;
+    > *:not(.bottomWave) {
+      margin-left: var(--side-margin);
+      margin-right: var(--side-margin);
+    }
+    margin-bottom: 20px;
+  }
+  
+  .plainText{
+    text-align: center;
+    color: var(--color-neutral-gray);
+    font-size: var(--font-size-22);
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    display: flex;
+    justify-content: center;
+    p{
+      max-width: 50vw;
+    }
+  }
+
+  .titleText {
+    font-family: var(--bold-font);
+    color: var(--color-secondary);
+    font-size: var(--font-size-35);
+    text-transform: uppercase;
+    text-align: center;
+    padding-top: clamp(17.4px, 1.739vw, 40px);
+  }
+
+  .mainContentContainer{
+    padding-top: clamp(17.4px, 1.739vw, 40px);
+    display: flex;
+    justify-content: space-between;
+    @include media(md) { 
+      flex-direction: column;
+      justify-content: start;
+      align-items: center;
+    }
+  }
+
+  .image{
+    width: clamp(400.95px, 26.0535vw, 599px);
+    height: 100%;
+  }
+
+  .infoBlock{
+    margin-top: auto;
+    margin-bottom: auto;
+    display: grid;
+    gap: clamp(47.445px, 4.737vw, 109px);
+    grid-template-columns: auto auto;
+    @include media(md) {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      margin-bottom: clamp(47.445px, 4.737vw, 109px);
+    }
+  }
+
+  .infoCardContainer{
+    span{
+      font-weight: 600;
+      font-family: var(--bold-font);
+      color: var(--color-secondary);
+      font-size: var(--font-size-25);
+      text-transform: uppercase;
+    }
+
+    p{
+      font-size: var(--font-size-18);
+      color: var(--color-secondary);
+    }
+  }
+
+  
+  
