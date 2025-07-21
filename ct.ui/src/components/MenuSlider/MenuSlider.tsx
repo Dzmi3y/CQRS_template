@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import product from "@models/product";
+import product from "@models/Product";
 import ArrowSliderButton from "@components/Buttons/ArrowSliderButton/ArrowSliderButton";
 import NavSliderDotButton from "@components/Buttons/NavSliderDotButton/NavSliderDotButton";
 import MenuCard from "./MenuCard/MenuCard";
@@ -7,9 +7,17 @@ import styles from "./styles.module.scss";
 import useDragScroll from "@hooks/useDragScroll";
 import useScrollPagination from "@hooks/useScrollPagination";
 import useScrollEndTrigger from "@hooks/useScrollEndTrigger";
+import useCart from "@hooks/useCart";
 
 const MenuSlider: React.FC<{ products: product[] }> = ({ products }) => {
   const sliderRef = useRef<HTMLDivElement>(null);
+
+  const { cart, dispatch } = useCart();
+
+  const addToCart = () => {
+    dispatch({ type: "ADD", payload: Product });
+  };
+
   useDragScroll(sliderRef);
   const { pageCount, currentPage, goToPage, detectPage } = useScrollPagination(
     sliderRef,
@@ -33,7 +41,9 @@ const MenuSlider: React.FC<{ products: product[] }> = ({ products }) => {
                 imageSrc={p.imageSrc}
                 price={p.price}
                 title={p.title}
-                onClick={() => {}}
+                onClick={() => {
+                  addToCart();
+                }}
               />
             ))}
           </div>

@@ -3,7 +3,7 @@ import BottomWaveImage from "@images/decorations/Bottom_wave.svg";
 import RevealOnScrollContainer from "@components/RevealOnScrollContainer/RevealOnScrollContainer";
 import MenuSlider from "@components/MenuSlider/MenuSlider";
 import MacaronImage from "@images/Home/Test_macaron.png";
-import product from "@models/product";
+import product from "@models/Product";
 
 const SetsBlock = () => {
   const products: product[] = Array.from({ length: 10 }, (_, i) => ({

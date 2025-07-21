@@ -1,8 +1,8 @@
-type product = {
+interface Product {
   id: string;
   imageSrc: string;
   price: number;
   title: string;
-};
+}
 
-export default product;
+export default Product;
