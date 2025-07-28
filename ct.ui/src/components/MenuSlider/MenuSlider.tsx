@@ -14,8 +14,8 @@ const MenuSlider: React.FC<{ products: product[] }> = ({ products }) => {
 
   const { cart, dispatch } = useCart();
 
-  const addToCart = () => {
-    dispatch({ type: "ADD", payload: Product });
+  const addToCart = (currentProduct: product) => {
+    dispatch({ type: "ADD", payload: currentProduct });
   };
 
   useDragScroll(sliderRef);
@@ -42,7 +42,7 @@ const MenuSlider: React.FC<{ products: product[] }> = ({ products }) => {
                 price={p.price}
                 title={p.title}
                 onClick={() => {
-                  addToCart();
+                  addToCart(p);
                 }}
               />
             ))}

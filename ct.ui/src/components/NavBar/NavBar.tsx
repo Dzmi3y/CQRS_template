@@ -6,13 +6,18 @@ import MacaronImage from "@images/Macaron_Icon.png";
 import useScrollUp from "@hooks/useScrollUp";
 import useScrollDown from "@hooks/useScrollDown";
 import BurgerButton from "../Buttons/BurgerButton/BurgerButton";
+import useCart from "@hooks/useCart";
+import CartItem from "@models/CartItem";
 
 const NavBar = () => {
   const [isFixed, setIsFixed] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { cart } = useCart();
 
   useScrollUp(() => setIsFixed(true));
   useScrollDown(() => setIsFixed(false));
+
+  const totalCount = cart.reduce<number>((acc, item) => acc + item.quantity, 0);
 
   const navItems = [
     { id: "home", label: "Home" },
@@ -52,14 +57,21 @@ const NavBar = () => {
           />
           <span>+123456789</span>
         </div>
-        <button className={styles.orderButton}>
-          <img className={styles.bagImage} src={BagImage} alt="Bag icon" />
+        <button className={styles.orderButton} draggable="false">
+          <img
+            className={styles.bagImage}
+            draggable="false"
+            src={BagImage}
+            alt="Bag icon"
+          />
+          <div>{totalCount}</div>
         </button>
       </nav>
 
       <div className={styles.navBlockMobile}>
         <button className={styles.orderButton}>
           <img className={styles.bagImage} src={BagImage} alt="Bag icon" />
+          <div>{totalCount}</div>
         </button>
         <BurgerButton
           active={menuOpen}

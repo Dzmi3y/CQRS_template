@@ -132,23 +132,29 @@ a{
   text-decoration: none;
 }
 
-
 .orderButton{
+  user-select: none;
+  position: relative;
   cursor: pointer;
   background: none;
   border: none;
-  img{
-    transition: transform 0.2s ease-in-out;
-  }
+  transition: transform 0.2s ease-in-out;
   &:hover{
-    img{
-      transform: scale(1.05);
-    }
+    transform: scale(1.05);
   }
   &:active{
-    img{
-      transform: scale(0.9);
-    }
+    transform: scale(0.9);
+  }
+
+  div{
+    background-color: var(--color-accent-blue);
+    border-radius: 50%;
+    font-family: var(--regular-font);
+    color: var(--color-primary);
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    padding: 1px;
   }
 }
 

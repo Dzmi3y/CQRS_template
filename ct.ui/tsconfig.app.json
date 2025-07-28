@@ -6,7 +6,9 @@
       "@images/*": ["src/assets/images/*"],
       "@components/*": ["src/components/*"],
       "@models/*": ["src/models/*"],
-      "@hooks/*": ["src/hooks/*"]
+      "@hooks/*": ["src/hooks/*"],
+      "@reducers/*": ["src/reducers/*"],
+      "@context/*": ["src/context/*"],
     },
     "types": ["node"],
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
