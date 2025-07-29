@@ -7,11 +7,12 @@ import useScrollUp from "@hooks/useScrollUp";
 import useScrollDown from "@hooks/useScrollDown";
 import BurgerButton from "../Buttons/BurgerButton/BurgerButton";
 import useCart from "@hooks/useCart";
-import CartItem from "@models/CartItem";
+import CartModal from "@components/CartModal/CartModal";
 
 const NavBar = () => {
-  const [isFixed, setIsFixed] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [isFixed, setIsFixed] = useState<boolean>(false);
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const [isCartHidden, setIsCartHidden] = useState<boolean>(true);
   const { cart } = useCart();
 
   useScrollUp(() => setIsFixed(true));
@@ -28,73 +29,96 @@ const NavBar = () => {
 
   const handleLinkClick = () => setMenuOpen(false);
 
+  const cartToggle = () => {
+    setIsCartHidden(!isCartHidden);
+  };
+
   return (
-    <div
-      className={`${styles.container} ${
-        isFixed ? styles.fixed : styles.absolute
-      }`}
-    >
-      <div className={styles.logoBlock}>
-        <img
-          className={styles.logoImage}
-          src={MacaronImage}
-          alt="Macaron logo"
-        />
-        <div className={styles.logoText}>Macaronsmania</div>
-      </div>
-
-      <nav className={styles.navBlockDesktop}>
-        {navItems.map(({ id, label }) => (
-          <a key={id} href={`/#${id}`} className={styles.navItem}>
-            {label}
-          </a>
-        ))}
-        <div className={styles.navItem}>
+    <>
+      <div
+        className={`${styles.container} ${
+          isFixed ? styles.fixed : styles.absolute
+        }`}
+      >
+        <div className={styles.logoBlock}>
           <img
-            className={styles.phoneImage}
-            src={PhoneImage}
-            alt="Phone icon"
+            className={styles.logoImage}
+            src={MacaronImage}
+            alt="Macaron logo"
           />
-          <span>+123456789</span>
+          <div className={styles.logoText}>Macaronsmania</div>
         </div>
-        <button className={styles.orderButton} draggable="false">
-          <img
-            className={styles.bagImage}
-            draggable="false"
-            src={BagImage}
-            alt="Bag icon"
-          />
-          <div>{totalCount}</div>
-        </button>
-      </nav>
 
-      <div className={styles.navBlockMobile}>
-        <button className={styles.orderButton}>
-          <img className={styles.bagImage} src={BagImage} alt="Bag icon" />
-          <div>{totalCount}</div>
-        </button>
-        <BurgerButton
-          active={menuOpen}
-          onToggle={() => setMenuOpen((prev) => !prev)}
-        />
-        <nav
-          className={`${styles.mobileNavItems} ${
-            menuOpen ? styles.showNav : styles.hideNav
-          }`}
-        >
+        <nav className={styles.navBlockDesktop}>
           {navItems.map(({ id, label }) => (
-            <a
-              key={id}
-              href={`/#${id}`}
-              className={styles.navItem}
-              onClick={handleLinkClick}
-            >
+            <a key={id} href={`/#${id}`} className={styles.navItem}>
               {label}
             </a>
           ))}
+          <div className={styles.navItem}>
+            <img
+              className={styles.phoneImage}
+              src={PhoneImage}
+              alt="Phone icon"
+            />
+            <span>+123456789</span>
+          </div>
+          <button
+            className={styles.orderButton}
+            onClick={() => cartToggle()}
+            draggable="false"
+          >
+            <img
+              className={styles.bagImage}
+              draggable="false"
+              src={BagImage}
+              alt="Bag icon"
+            />
+            {totalCount > 0 ? <div>{totalCount}</div> : ""}
+          </button>
         </nav>
+
+        <div className={styles.navBlockMobile}>
+          <button
+            className={styles.orderButton}
+            draggable="false"
+            onClick={() => cartToggle()}
+          >
+            <img
+              className={styles.bagImage}
+              draggable="false"
+              src={BagImage}
+              alt="Bag icon"
+            />
+            {totalCount > 0 ? <div>{totalCount}</div> : ""}
+          </button>
+          <BurgerButton
+            active={menuOpen}
+            onToggle={() => setMenuOpen((prev) => !prev)}
+          />
+          <nav
+            className={`${styles.mobileNavItems} ${
+              menuOpen ? styles.showNav : styles.hideNav
+            }`}
+          >
+            {navItems.map(({ id, label }) => (
+              <a
+                key={id}
+                href={`/#${id}`}
+                className={styles.navItem}
+                onClick={handleLinkClick}
+              >
+                {label}
+              </a>
+            ))}
+          </nav>
+        </div>
       </div>
-    </div>
+      <CartModal
+        isHidden={isCartHidden}
+        onToggleVisibility={() => cartToggle()}
+      />
+    </>
   );
 };
 

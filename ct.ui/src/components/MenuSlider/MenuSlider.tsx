@@ -8,6 +8,7 @@ import useDragScroll from "@hooks/useDragScroll";
 import useScrollPagination from "@hooks/useScrollPagination";
 import useScrollEndTrigger from "@hooks/useScrollEndTrigger";
 import useCart from "@hooks/useCart";
+import { CartActionTypes } from "@actions/CartAction";
 
 const MenuSlider: React.FC<{ products: product[] }> = ({ products }) => {
   const sliderRef = useRef<HTMLDivElement>(null);
@@ -15,7 +16,7 @@ const MenuSlider: React.FC<{ products: product[] }> = ({ products }) => {
   const { cart, dispatch } = useCart();
 
   const addToCart = (currentProduct: product) => {
-    dispatch({ type: "ADD", payload: currentProduct });
+    dispatch({ type: CartActionTypes.ADD, payload: currentProduct });
   };
 
   useDragScroll(sliderRef);
