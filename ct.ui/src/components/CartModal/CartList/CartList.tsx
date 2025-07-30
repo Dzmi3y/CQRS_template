@@ -2,8 +2,13 @@ import useCart from "@hooks/useCart";
 import styles from "./styles.module.scss";
 import { CartActionTypes } from "@actions/CartAction";
 import Product from "@models/Product";
+import CartControlButton from "@components/Buttons/CartControlButton/CartControlButton";
+import CloseButton from "@components/Buttons/CloseButton/CloseButton";
+import React from "react";
 
-const CartList = () => {
+const CartList: React.FC<{ onToggleVisibility: () => void }> = ({
+  onToggleVisibility,
+}) => {
   const { cart, dispatch } = useCart();
   const add = (currentProduct: Product) => {
     dispatch({ type: CartActionTypes.ADD, payload: currentProduct });
@@ -15,20 +20,34 @@ const CartList = () => {
 
   return (
     <div className={styles.container}>
-      {cart.map((item) => (
-        <div key={item.id}>
-          <img src={item.imageSrc} />
-          <div>
-            {item.title}
-            {item.price}
-            {item.quantity}
-            <div>
-              <button onClick={() => add(item)}>+</button>
-              <button onClick={() => remove(item)}>-</button>
+      <div className={styles.header}>
+        <CloseButton onClick={() => onToggleVisibility()} />
+      </div>
+      {!cart.length && <div className={styles.emptyCart}>CART IS EMPTY</div>}
+
+      <div className={styles.cardContainer}>
+        <div>
+          {cart.map((item) => (
+            <div className={styles.card} key={item.id}>
+              <img className={styles.image} src={item.imageSrc} />
+              <div>
+                <div className={styles.title}> {item.title} </div>
+                <div className={styles.cardInfo}>
+                  Price: <b>{item.price}$</b> Quantity: <b>{item.quantity}</b>
+                </div>
+              </div>
+              <div className={styles.buttonsContainer}>
+                <CartControlButton onClick={() => add(item)}>
+                  +
+                </CartControlButton>
+                <CartControlButton onClick={() => remove(item)}>
+                  -
+                </CartControlButton>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
-      ))}
+      </div>
     </div>
   );
 };

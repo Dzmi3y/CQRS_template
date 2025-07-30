@@ -1,3 +1,72 @@
+@import '@mixins/_breakpoints.scss';
+
 .container{
-    background-color: white;
+    background: var(--gradient-to-bottom);
+    position: absolute;
+    top: 10vh;
+    left: 5vw;
+    right: 5vw;
+    bottom: 10vh;
+    min-height: 80vh;
+    border-radius: 50px;
+    padding: var(--font-size-20);
+    display: flex;
+    flex-direction: column;
+}
+
+.image{
+    width: clamp(163px, 14.25vw, 228px);
+  }
+
+.emptyCart{
+    font-family: var(--bold-font);
+    font-size: var(--font-size-30);
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cardContainer{
+    overflow-y: scroll;
+    height: auto;
+}
+.title{
+      font-family: var(--bold-font);
+      font-size: var(--font-size-30);
+      text-transform: uppercase;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      p{
+        max-width: clamp(180px, 20.56vw, 329px);
+      }
+  }
+  
+
+.card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--font-size-20);
+    @include media(md) { 
+        flex-direction: column;
+      }
+  }
+
+.cardInfo{
+    font-size: var(--font-size-20);
+  }
+.buttonsContainer{
+    display: flex;
+    flex-direction: column;
+    gap: var(--font-size-16);
+    justify-content: center;
+    align-items: center;
+}
+
+.header{
+    padding-right: var(--font-size-16);
+    display: flex;
+    justify-content: end;
+    align-items: center;
 }

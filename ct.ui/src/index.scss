@@ -58,3 +58,7 @@ body {
   color: var(--color-primary);
   position: relative;
 }
+
+.no-scroll {
+  overflow: hidden;
+}
