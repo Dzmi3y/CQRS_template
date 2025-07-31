@@ -30,19 +30,21 @@ const CartList: React.FC<{ onToggleVisibility: () => void }> = ({
           {cart.map((item) => (
             <div className={styles.card} key={item.id}>
               <img className={styles.image} src={item.imageSrc} />
-              <div>
-                <div className={styles.title}> {item.title} </div>
-                <div className={styles.cardInfo}>
-                  Price: <b>{item.price}$</b> Quantity: <b>{item.quantity}</b>
+              <div className={styles.infoContainer}>
+                <div>
+                  <div className={styles.title}> {item.title} </div>
+                  <div className={styles.cardInfo}>
+                    Price: <b>{item.price}$</b> Quantity: <b>{item.quantity}</b>
+                  </div>
                 </div>
-              </div>
-              <div className={styles.buttonsContainer}>
-                <CartControlButton onClick={() => add(item)}>
-                  +
-                </CartControlButton>
-                <CartControlButton onClick={() => remove(item)}>
-                  -
-                </CartControlButton>
+                <div className={styles.buttonsContainer}>
+                  <CartControlButton onClick={() => add(item)}>
+                    +
+                  </CartControlButton>
+                  <CartControlButton onClick={() => remove(item)}>
+                    -
+                  </CartControlButton>
+                </div>
               </div>
             </div>
           ))}
