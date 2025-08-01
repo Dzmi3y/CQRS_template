@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./styles.module.scss";
 import BagImage from "@images/menu/bag.png";
+import AccountImage from "@images/menu/account.png";
 import PhoneImage from "@images/menu/phone.png";
 import MacaronImage from "@images/Macaron_Icon.png";
 import useScrollUp from "@hooks/useScrollUp";
@@ -63,35 +64,63 @@ const NavBar = () => {
             />
             <span>+123456789</span>
           </div>
-          <button
-            className={styles.orderButton}
-            onClick={() => cartToggle()}
-            draggable="false"
-          >
-            <img
-              className={styles.bagImage}
+          <div className={styles.controlButtonContainer}>
+            <button
+              className={styles.orderButton}
+              onClick={() => cartToggle()}
               draggable="false"
-              src={BagImage}
-              alt="Bag icon"
-            />
-            {totalCount > 0 ? <div>{totalCount}</div> : ""}
-          </button>
+            >
+              <img
+                className={styles.bagImage}
+                draggable="false"
+                src={BagImage}
+                alt="Bag icon"
+              />
+              {totalCount > 0 ? <div>{totalCount}</div> : ""}
+            </button>
+            <button
+              className={styles.accountButton}
+              onClick={() => console.log("accountClick")}
+              draggable="false"
+            >
+              <img
+                className={styles.accountImage}
+                draggable="false"
+                src={AccountImage}
+                alt="Account icon"
+              />
+            </button>
+          </div>
         </nav>
 
         <div className={styles.navBlockMobile}>
-          <button
-            className={styles.orderButton}
-            draggable="false"
-            onClick={() => cartToggle()}
-          >
-            <img
-              className={styles.bagImage}
+          <div className={styles.controlButtonContainer}>
+            <button
+              className={styles.orderButton}
               draggable="false"
-              src={BagImage}
-              alt="Bag icon"
-            />
-            {totalCount > 0 ? <div>{totalCount}</div> : ""}
-          </button>
+              onClick={() => cartToggle()}
+            >
+              <img
+                className={styles.bagImage}
+                draggable="false"
+                src={BagImage}
+                alt="Bag icon"
+              />
+              {totalCount > 0 ? <div>{totalCount}</div> : ""}
+            </button>
+            <button
+              className={styles.accountButton}
+              onClick={() => console.log("accountClick")}
+              draggable="false"
+            >
+              <img
+                className={styles.accountImage}
+                draggable="false"
+                src={AccountImage}
+                alt="Account icon"
+              />
+            </button>
+          </div>
           <BurgerButton
             active={menuOpen}
             onToggle={() => setMenuOpen((prev) => !prev)}

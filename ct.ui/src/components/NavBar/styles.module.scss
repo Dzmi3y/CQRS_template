@@ -61,7 +61,7 @@
 .navBlockMobile{
   display: none;
   margin-top: auto;
-  gap: var(--gap-size-60);
+  gap: var(--gap-size-35);
 
   @include media(md) { 
     display: flex!important;
@@ -120,7 +120,22 @@
   margin-right: 5px;
 }
 
+.controlButtonContainer{
+  display: flex;
+  padding-right: var(--side-margin);
+  @include media(md) { 
+    padding-right: 0px;
+  }
+}
+
+
 .bagImage{
+  width: 40px;
+  height: 40px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.accountImage{
   width: 40px;
   height: 40px;
   transition: transform 0.2s ease-in-out;
@@ -158,3 +173,17 @@ a{
   }
 }
 
+.accountButton{
+  user-select: none;
+  position: relative;
+  cursor: pointer;
+  background: none;
+  border: none;
+  transition: transform 0.2s ease-in-out;
+  &:hover{
+    transform: scale(1.05);
+  }
+  &:active{
+    transform: scale(0.9);
+  }
+}
