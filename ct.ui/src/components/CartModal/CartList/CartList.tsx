@@ -5,6 +5,7 @@ import Product from "@models/Product";
 import CartControlButton from "@components/Buttons/CartControlButton/CartControlButton";
 import CloseButton from "@components/Buttons/CloseButton/CloseButton";
 import React from "react";
+import OrderButton from "@components/Buttons/OrderButton/OrderButton";
 
 const CartList: React.FC<{ onToggleVisibility: () => void }> = ({
   onToggleVisibility,
@@ -12,6 +13,11 @@ const CartList: React.FC<{ onToggleVisibility: () => void }> = ({
   const { cart, dispatch } = useCart();
   const add = (currentProduct: Product) => {
     dispatch({ type: CartActionTypes.ADD, payload: currentProduct });
+  };
+
+  const createOrder = () => {
+    dispatch({ type: CartActionTypes.CLEAR });
+    console.log("order created");
   };
 
   const remove = (currentProduct: Product) => {
@@ -49,6 +55,15 @@ const CartList: React.FC<{ onToggleVisibility: () => void }> = ({
             </div>
           ))}
         </div>
+        {cart.length !== 0 && (
+          <div className={styles.orderPanel}>
+            <OrderButton onClick={() => createOrder()}>
+              Buy{" "}
+              {cart.reduce((acc, item) => acc + item.price * item.quantity, 0)}
+              {"$"}
+            </OrderButton>
+          </div>
+        )}
       </div>
     </div>
   );
