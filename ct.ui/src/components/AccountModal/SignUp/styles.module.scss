@@ -1,0 +1,24 @@
+.container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.title{
+    font-family: var(--bold-font);
+    font-size: var(--font-size-30);
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p{
+      max-width: clamp(180px, 20.56vw, 329px);
+    }
+}

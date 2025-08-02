@@ -1,0 +1,38 @@
+.container{
+  height: 100vh;
+  overflow-y: scroll;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  transition: background-color 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  background-color: rgba(99, 86, 86, 0);
+  z-index: 102;
+
+  div{
+    transition: opacity 0.2s ease-in-out;
+    opacity: 0%;
+  }
+}
+
+.shown{
+    visibility: visible;
+    background-color: rgba(0, 0, 0, 0.4);
+    div{
+        opacity: 100%;
+    }
+}
+
+.hidden{
+    visibility: hidden;
+    background-color: rgba(0, 0, 0, 0);
+    div{
+        opacity: 0%;
+    }
+}
+
+.content{
+  position: relative;
+  
+}

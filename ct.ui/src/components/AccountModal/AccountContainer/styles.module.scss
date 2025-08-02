@@ -1,0 +1,30 @@
+@use '@mixins/breakpoints' as *;
+
+.container{
+    background: var(--gradient-to-bottom);
+    position: absolute;
+    top: 10vh;
+    left: 5vw;
+    right: 5vw;
+    bottom: 10vh;
+    min-height: 80vh;
+    border-radius: 50px;
+    padding: var(--font-size-16);
+    display: flex;
+    flex-direction: column;
+}
+
+.header{
+    padding-right: var(--font-size-16);
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+
+.content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}

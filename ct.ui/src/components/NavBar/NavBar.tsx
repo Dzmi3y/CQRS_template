@@ -9,10 +9,12 @@ import useScrollDown from "@hooks/useScrollDown";
 import BurgerButton from "../Buttons/BurgerButton/BurgerButton";
 import useCart from "@hooks/useCart";
 import CartModal from "@components/CartModal/CartModal";
+import AccountModal from "@components/AccountModal/AccountModal";
 
 const NavBar = () => {
   const [isFixed, setIsFixed] = useState<boolean>(false);
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const [isAccountOpen, setIsAccountOpen] = useState<boolean>(true);
   const [isCartHidden, setIsCartHidden] = useState<boolean>(true);
   const { cart } = useCart();
 
@@ -32,6 +34,10 @@ const NavBar = () => {
 
   const cartToggle = () => {
     setIsCartHidden(!isCartHidden);
+  };
+
+  const accountToggle = () => {
+    setIsAccountOpen(!isAccountOpen);
   };
 
   return (
@@ -80,7 +86,7 @@ const NavBar = () => {
             </button>
             <button
               className={styles.accountButton}
-              onClick={() => console.log("accountClick")}
+              onClick={() => accountToggle()}
               draggable="false"
             >
               <img
@@ -110,7 +116,7 @@ const NavBar = () => {
             </button>
             <button
               className={styles.accountButton}
-              onClick={() => console.log("accountClick")}
+              onClick={() => accountToggle()}
               draggable="false"
             >
               <img
@@ -146,6 +152,10 @@ const NavBar = () => {
       <CartModal
         isHidden={isCartHidden}
         onToggleVisibility={() => cartToggle()}
+      />
+      <AccountModal
+        isHidden={isAccountOpen}
+        onToggleVisibility={accountToggle}
       />
     </>
   );
