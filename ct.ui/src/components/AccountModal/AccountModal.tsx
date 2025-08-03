@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import styles from "./styles.module.scss";
 import AccountContainer from "./AccountContainer/AccountContainer";
 import SignUp from "./SignUp/SignUp";
+import SignIn from "./SignIn/SignIn";
 
 const AccountModal: React.FC<{
   isHidden: boolean;
@@ -11,6 +12,14 @@ const AccountModal: React.FC<{
     if (e.target === e.currentTarget) {
       onToggleVisibility();
     }
+  };
+
+  const onSignInComplete = () => {
+    console.log("sign in complete");
+  };
+
+  const onSignUpComplete = () => {
+    console.log("sign up complete");
   };
 
   useEffect(() => {
@@ -29,7 +38,8 @@ const AccountModal: React.FC<{
     >
       <div className={styles.content}>
         <AccountContainer onToggleVisibility={() => onToggleVisibility()}>
-          <SignUp />
+          {/* <SignUp onSignUpComplete={onSignUpComplete}  /> */}
+          <SignIn onSignInComplete={onSignInComplete} />
         </AccountContainer>
       </div>
     </div>

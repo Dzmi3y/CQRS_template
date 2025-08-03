@@ -2,7 +2,9 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 import styles from "./styles.module.scss";
 import SignUpContract from "@models/SignUpContract";
 
-const SignUp = () => {
+const SignUp: React.FC<{ onSignUpComplete: () => void }> = ({
+  onSignUpComplete,
+}) => {
   const [formData, setFormData] = useState<SignUpContract>({
     Name: "",
     Email: "",
@@ -58,9 +60,9 @@ const SignUp = () => {
     }
 
     confirmInput.setCustomValidity("");
+    emailInput.setCustomValidity("");
 
     console.log("Form submitted:", formData);
-
     setFormData({
       Name: "",
       Email: "",
@@ -69,6 +71,8 @@ const SignUp = () => {
       DefaultPhone: "",
       DefaultAddress: "",
     });
+
+    onSignUpComplete();
   };
   return (
     <div className={styles.container}>
