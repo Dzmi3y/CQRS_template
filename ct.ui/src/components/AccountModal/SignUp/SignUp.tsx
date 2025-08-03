@@ -12,21 +12,52 @@ const SignUp = () => {
     DefaultAddress: "",
   });
 
+  const checkEmail: (email: string) => boolean = (email: string) => {
+    return email === "test@test.com";
+  };
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [id]: value,
     }));
+
+    if (id === "Email") {
+      const emailInput = document.getElementById("Email") as HTMLInputElement;
+      emailInput.setCustomValidity("");
+    }
+
+    if (id === "ConfirmPassword" || id === "Password") {
+      const confirmInput = document.getElementById(
+        "ConfirmPassword"
+      ) as HTMLInputElement;
+      confirmInput.setCustomValidity("");
+    }
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (formData.Password !== formData.ConfirmPassword) {
-      alert("Passwords do not match!");
+    const confirmInput = document.getElementById(
+      "ConfirmPassword"
+    ) as HTMLInputElement;
+
+    const emailInput = document.getElementById("Email") as HTMLInputElement;
+
+    if (checkEmail(formData.Email)) {
+      emailInput.setCustomValidity("Email already exist");
+      emailInput.reportValidity();
       return;
     }
+
+    if (formData.Password !== formData.ConfirmPassword) {
+      confirmInput.setCustomValidity("Passwords do not match");
+      confirmInput.reportValidity();
+      return;
+    }
+
+    confirmInput.setCustomValidity("");
 
     console.log("Form submitted:", formData);
 
@@ -43,65 +74,79 @@ const SignUp = () => {
     <div className={styles.container}>
       <div className={styles.title}>Sign Up</div>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name:</label>
-        <input
-          type="text"
-          id="name"
-          placeholder="Name"
-          value={formData.Name}
-          onChange={handleChange}
-          required
-        />
-
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          placeholder="Email"
-          value={formData.Email}
-          onChange={handleChange}
-          required
-        />
-
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          placeholder="Password"
-          value={formData.Password}
-          onChange={handleChange}
-          required
-        />
-
-        <label htmlFor="confirmPassword">Confirm Password:</label>
-        <input
-          type="password"
-          id="confirmPassword"
-          placeholder="Confirm Password"
-          value={formData.ConfirmPassword}
-          onChange={handleChange}
-          required
-        />
-
-        <label htmlFor="phone">Default Phone:</label>
-        <input
-          type="tel"
-          id="phone"
-          placeholder="Default Phone"
-          value={formData.DefaultPhone}
-          onChange={handleChange}
-        />
-
-        <label htmlFor="address">Default Address:</label>
-        <input
-          type="text"
-          id="address"
-          placeholder="Default Address"
-          value={formData.DefaultAddress}
-          onChange={handleChange}
-        />
-
-        <button type="submit">Submit</button>
+        <div className={styles.fieldContainer}>
+          <label htmlFor="Name">Name:</label>
+          <input
+            className={styles.input}
+            type="text"
+            id="Name"
+            placeholder="Name"
+            value={formData.Name}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className={styles.fieldContainer}>
+          <label htmlFor="Email">Email:</label>
+          <input
+            className={styles.input}
+            type="email"
+            id="Email"
+            placeholder="Email"
+            value={formData.Email}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className={styles.fieldContainer}>
+          <label htmlFor="Password">Password:</label>
+          <input
+            className={styles.input}
+            type="password"
+            id="Password"
+            placeholder="Password"
+            value={formData.Password}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className={styles.fieldContainer}>
+          <label htmlFor="ConfirmPassword">Confirm Password:</label>
+          <input
+            className={styles.input}
+            type="password"
+            id="ConfirmPassword"
+            placeholder="Confirm Password"
+            value={formData.ConfirmPassword}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className={styles.fieldContainer}>
+          <label htmlFor="DefaultPhone">Default Phone:</label>
+          <input
+            className={styles.input}
+            type="tel"
+            id="DefaultPhone"
+            placeholder="Default Phone"
+            value={formData.DefaultPhone}
+            onChange={handleChange}
+          />
+        </div>
+        <div className={styles.fieldContainer}>
+          <label htmlFor="DefaultAddress">Default Address:</label>
+          <input
+            className={styles.input}
+            type="text"
+            id="DefaultAddress"
+            placeholder="Default Address"
+            value={formData.DefaultAddress}
+            onChange={handleChange}
+          />
+        </div>
+        <button className={styles.button} type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );
