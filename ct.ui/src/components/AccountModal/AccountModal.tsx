@@ -3,6 +3,7 @@ import styles from "./styles.module.scss";
 import AccountContainer from "./AccountContainer/AccountContainer";
 import SignUp from "./SignUp/SignUp";
 import SignIn from "./SignIn/SignIn";
+import AccountDetails from "./AccountDetails/AccountDetails";
 
 const AccountModal: React.FC<{
   isHidden: boolean;
@@ -16,10 +17,16 @@ const AccountModal: React.FC<{
 
   const onSignInComplete = () => {
     console.log("sign in complete");
+    onToggleVisibility();
   };
 
   const onSignUpComplete = () => {
     console.log("sign up complete");
+    onToggleVisibility();
+  };
+  const onSignOutComplete = () => {
+    console.log("sign out complete");
+    onToggleVisibility();
   };
 
   useEffect(() => {
@@ -39,7 +46,8 @@ const AccountModal: React.FC<{
       <div className={styles.content}>
         <AccountContainer onToggleVisibility={() => onToggleVisibility()}>
           {/* <SignUp onSignUpComplete={onSignUpComplete}  /> */}
-          <SignIn onSignInComplete={onSignInComplete} />
+          {/* <SignIn onSignInComplete={onSignInComplete} /> */}
+          <AccountDetails onSignOutComplete={onSignOutComplete} />
         </AccountContainer>
       </div>
     </div>
