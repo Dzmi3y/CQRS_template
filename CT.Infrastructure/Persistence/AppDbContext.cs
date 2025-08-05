@@ -21,6 +21,11 @@ public class AppDbContext : DbContext, IAppDbContext
     public DbSet<OrderItem> OrderItems { get; set; }
     public DbSet<RefreshToken> RefreshTokens { get; set; }
 
+    public bool CanConnect()
+    {
+        return  this.Database.CanConnect();
+    }
+
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         UpdateAuditProperties();

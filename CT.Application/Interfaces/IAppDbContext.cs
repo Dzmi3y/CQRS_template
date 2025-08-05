@@ -5,6 +5,7 @@ namespace CT.Application.Interfaces;
 
 public interface IAppDbContext
 {
+    bool CanConnect();
     DbSet<User> Users { get; }
     DbSet<Product> Products { get; }
     DbSet<Order> Orders { get; }

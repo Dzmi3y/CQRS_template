@@ -1,4 +1,5 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+﻿using CT.API.Middleware;
+using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using CT.Application.Interfaces;
 using CT.Application.Interfaces.Services;
@@ -102,5 +103,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseDatabaseCheck();
 
 app.Run();

@@ -19,7 +19,7 @@ public class ProductsController : ControllerBase
 
     [HttpGet]
     [AllowAnonymous]
-    public async Task<IActionResult> Get(GetProductsRequest request)
+    public async Task<IActionResult> Get([FromQuery] GetProductsRequest request)
     {
         var productList = await _mediator.Send(new GetProductListQuery(request.Count, request.IsSet));
 
