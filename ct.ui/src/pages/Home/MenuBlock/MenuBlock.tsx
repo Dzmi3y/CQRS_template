@@ -2,16 +2,32 @@ import styles from "./styles.module.scss";
 import BottomWaveImage from "@images/decorations/Bottom_wave.svg";
 import RevealOnScrollContainer from "@components/RevealOnScrollContainer/RevealOnScrollContainer";
 import MenuSlider from "@components/MenuSlider/MenuSlider";
-import MacaronImage from "@images/Home/Test_macaron.png";
-import product from "@models/Product";
+import { useQuery } from "@tanstack/react-query";
+import Product from "@models/Product";
+import { getProducts } from "@api/productApi";
 
 const MenuBlock = () => {
-  const products: product[] = Array.from({ length: 10 }, (_, i) => ({
-    id: (i + 1).toString(),
-    imageSrc: MacaronImage,
-    price: 1.5,
-    title: `${i} macarons with berry ganache`,
-  }));
+  // const products: product[] = Array.from({ length: 10 }, (_, i) => ({
+  //   id: (i + 1).toString(),
+  //   imageSrc: MacaronImage,
+  //   price: 1.5,
+  //   title: `${i} macarons with berry ganache`,
+  // }));
+
+  const { data, isLoading, error } = useQuery<Product[]>({
+    queryKey: ["products"],
+    queryFn: getProducts,
+  });
+
+  if (!isLoading) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(data);
+    }
+  }
+
+  const products = isLoading || error ? [] : data || [];
 
   return (
     <div className={styles.container}>

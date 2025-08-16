@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { useQuery } from "@tanstack/react-query";
 import product from "@models/Product";
 import ArrowSliderButton from "@components/Buttons/ArrowSliderButton/ArrowSliderButton";
 import NavSliderDotButton from "@components/Buttons/NavSliderDotButton/NavSliderDotButton";
@@ -9,9 +10,13 @@ import useScrollPagination from "@hooks/useScrollPagination";
 import useScrollEndTrigger from "@hooks/useScrollEndTrigger";
 import useCart from "@hooks/useCart";
 import { CartActionTypes } from "@actions/CartAction";
+import { BASE_URL } from "@api/apiConfig";
 
 const MenuSlider: React.FC<{ products: product[] }> = ({ products }) => {
   const sliderRef = useRef<HTMLDivElement>(null);
+
+  console.log("test");
+  console.log(products);
 
   const { cart, dispatch } = useCart();
 
@@ -39,9 +44,9 @@ const MenuSlider: React.FC<{ products: product[] }> = ({ products }) => {
             {products.map((p) => (
               <MenuCard
                 key={p.id}
-                imageSrc={p.imageSrc}
+                imageSrc={`${BASE_URL}/${p.imageUrl}`}
                 price={p.price}
-                title={p.title}
+                title={p.name}
                 onClick={() => {
                   addToCart(p);
                 }}
