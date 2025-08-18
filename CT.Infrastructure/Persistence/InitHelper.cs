@@ -45,7 +45,7 @@ public static class InitHelper
                 Name = "Macaron set #2",
                 ImageUrl = "images/macarons/set2.png",
                 Price = 10.00m,
-                Type = ProductType.Individually,
+                Type = ProductType.Set,
                 CreatedDateUtc = new DateTime(2025, 4, 15, 9, 43, 28, 725, DateTimeKind.Utc).AddTicks(5282),
                 ModifiedDateUtc = new DateTime(2025, 4, 15, 9, 43, 28, 725, DateTimeKind.Utc).AddTicks(5282),
                 IsDeleted = false
@@ -56,7 +56,7 @@ public static class InitHelper
                 Name = "Macaron set #6",
                 ImageUrl = "images/macarons/set6.png",
                 Price = 10.00m,
-                Type = ProductType.Individually,
+                Type = ProductType.Set,
                 CreatedDateUtc = new DateTime(2025, 4, 15, 9, 43, 28, 725, DateTimeKind.Utc).AddTicks(5295),
                 ModifiedDateUtc = new DateTime(2025, 4, 15, 9, 43, 28, 725, DateTimeKind.Utc).AddTicks(5296),
                 IsDeleted = false
@@ -78,7 +78,7 @@ public static class InitHelper
                 Name = "Macaron set #4",
                 ImageUrl = "images/macarons/set4.png",
                 Price = 10.00m,
-                Type = ProductType.Individually,
+                Type = ProductType.Set,
                 CreatedDateUtc = new DateTime(2025, 4, 15, 9, 43, 28, 725, DateTimeKind.Utc).AddTicks(5291),
                 ModifiedDateUtc = new DateTime(2025, 4, 15, 9, 43, 28, 725, DateTimeKind.Utc).AddTicks(5291),
                 IsDeleted = false
@@ -111,7 +111,7 @@ public static class InitHelper
                 Name = "Macaron set #1",
                 ImageUrl = "images/macarons/set1.png",
                 Price = 10.00m,
-                Type = ProductType.Individually,
+                Type = ProductType.Set,
                 CreatedDateUtc = new DateTime(2025, 4, 15, 9, 43, 28, 725, DateTimeKind.Utc).AddTicks(5280),
                 ModifiedDateUtc = new DateTime(2025, 4, 15, 9, 43, 28, 725, DateTimeKind.Utc).AddTicks(5280),
                 IsDeleted = false
@@ -133,7 +133,7 @@ public static class InitHelper
                 Name = "Macaron set #5",
                 ImageUrl = "images/macarons/set5.png",
                 Price = 10.00m,
-                Type = ProductType.Individually,
+                Type = ProductType.Set,
                 CreatedDateUtc = new DateTime(2025, 4, 15, 9, 43, 28, 725, DateTimeKind.Utc).AddTicks(5293),
                 ModifiedDateUtc = new DateTime(2025, 4, 15, 9, 43, 28, 725, DateTimeKind.Utc).AddTicks(5294),
                 IsDeleted = false
@@ -144,7 +144,7 @@ public static class InitHelper
                 Name = "Macaron set #3",
                 ImageUrl = "images/macarons/set3.png",
                 Price = 10.00m,
-                Type = ProductType.Individually,
+                Type = ProductType.Set,
                 CreatedDateUtc = new DateTime(2025, 4, 15, 9, 43, 28, 725, DateTimeKind.Utc).AddTicks(5289),
                 ModifiedDateUtc = new DateTime(2025, 4, 15, 9, 43, 28, 725, DateTimeKind.Utc).AddTicks(5289),
                 IsDeleted = false
