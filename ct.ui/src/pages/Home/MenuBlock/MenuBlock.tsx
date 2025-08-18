@@ -7,16 +7,9 @@ import Product from "@models/Product";
 import { getProducts } from "@api/productApi";
 
 const MenuBlock = () => {
-  // const products: product[] = Array.from({ length: 10 }, (_, i) => ({
-  //   id: (i + 1).toString(),
-  //   imageSrc: MacaronImage,
-  //   price: 1.5,
-  //   title: `${i} macarons with berry ganache`,
-  // }));
-
   const { data, isLoading, error } = useQuery<Product[]>({
     queryKey: ["products"],
-    queryFn: getProducts,
+    queryFn: () => getProducts(false),
   });
 
   if (!isLoading) {
