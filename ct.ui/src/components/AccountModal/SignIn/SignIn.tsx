@@ -1,10 +1,14 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import SignInContract from "@models/SignInContract";
+import useAccount from "@hooks/useAccount";
+import { AccountActionTypes } from "@actions/AccountAction";
 
 const SignIn: React.FC<{ onSignInComplete: () => void }> = ({
   onSignInComplete,
 }) => {
+  const { account, dispatch } = useAccount();
+
   const [formData, setFormData] = useState<SignInContract>({
     Email: "",
     Password: "",
@@ -39,12 +43,14 @@ const SignIn: React.FC<{ onSignInComplete: () => void }> = ({
     }
 
     emailInput.setCustomValidity("");
+    dispatch({ type: AccountActionTypes.SIGN_IN, payload: formData });
 
     console.log("Form submitted:", formData);
     setFormData({
       Email: "",
       Password: "",
     });
+
     onSignInComplete();
   };
   return (

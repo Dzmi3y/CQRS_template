@@ -1,10 +1,13 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import styles from "./styles.module.scss";
 import SignUpContract from "@models/SignUpContract";
+import { AccountActionTypes } from "@actions/AccountAction";
+import useAccount from "@hooks/useAccount";
 
 const SignUp: React.FC<{ onSignUpComplete: () => void }> = ({
   onSignUpComplete,
 }) => {
+  const { account, dispatch } = useAccount();
   const [formData, setFormData] = useState<SignUpContract>({
     Name: "",
     Email: "",
@@ -71,6 +74,8 @@ const SignUp: React.FC<{ onSignUpComplete: () => void }> = ({
       DefaultPhone: "",
       DefaultAddress: "",
     });
+
+    dispatch({ type: AccountActionTypes.SIGN_UP, payload: formData });
 
     onSignUpComplete();
   };

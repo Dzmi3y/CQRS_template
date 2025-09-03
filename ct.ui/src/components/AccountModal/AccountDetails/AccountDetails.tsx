@@ -3,15 +3,13 @@ import styles from "./styles.module.scss";
 import AccountInfo from "@models/AccountInfo";
 import OrderInfo from "@models/OrderInfo";
 import AccordionItem from "@components/AccordionItem/AccordionItem";
+import useAccount from "@hooks/useAccount";
+import { AccountActionTypes } from "@actions/AccountAction";
 
 const AccountDetails: React.FC<{ onSignOutComplete: () => void }> = ({
   onSignOutComplete,
 }) => {
-  const [accountInfo, SetAccountInfo] = useState<AccountInfo>({
-    userEmail: "test@test.com",
-    userId: "test",
-    userName: "Test User",
-  });
+  const { account, dispatch } = useAccount();
 
   const [orderInfoList, SetOrderInfoList] = useState<Array<OrderInfo>>([
     {
@@ -113,6 +111,12 @@ const AccountDetails: React.FC<{ onSignOutComplete: () => void }> = ({
   ]);
 
   const handleSignOut = () => {
+    if (account.accountInfo) {
+      dispatch({
+        type: AccountActionTypes.SIGN_OUT,
+        payload: account.accountInfo.userId,
+      });
+    }
     onSignOutComplete();
   };
 
@@ -121,8 +125,8 @@ const AccountDetails: React.FC<{ onSignOutComplete: () => void }> = ({
       <div className={styles.title}>Account details</div>
 
       <div>
-        <div>{accountInfo.userName}</div>
-        <div>{accountInfo.userEmail}</div>
+        <div>{account.accountInfo?.userName}</div>
+        <div>{account.accountInfo?.userEmail}</div>
       </div>
 
       <div className={styles.orderContainer}>

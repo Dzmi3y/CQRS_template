@@ -36,3 +36,22 @@
   position: relative;
   
 }
+
+.switchButton{
+  border: none;
+  background: none;
+  margin: 0;
+  padding: 0;
+  font-family: var(--regular-font);
+  color: var(--color-primary);
+  text-decoration: underline;
+  cursor: pointer;
+  
+  &:hover {
+    text-decoration: none;
+  }
+  
+  &:active {
+    text-decoration: underline;
+  }
+}
