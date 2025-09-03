@@ -6,6 +6,7 @@ import CartControlButton from "@components/Buttons/CartControlButton/CartControl
 import CloseButton from "@components/Buttons/CloseButton/CloseButton";
 import React from "react";
 import OrderButton from "@components/Buttons/OrderButton/OrderButton";
+import { BASE_URL } from "@api/apiConfig";
 
 const CartList: React.FC<{ onToggleVisibility: () => void }> = ({
   onToggleVisibility,
@@ -35,10 +36,13 @@ const CartList: React.FC<{ onToggleVisibility: () => void }> = ({
         <div>
           {cart.map((item) => (
             <div className={styles.card} key={item.id}>
-              <img className={styles.image} src={item.imageSrc} />
+              <img
+                className={styles.image}
+                src={`${BASE_URL}/${item.imageUrl}`}
+              />
               <div className={styles.infoContainer}>
                 <div>
-                  <div className={styles.title}> {item.title} </div>
+                  <div className={styles.title}> {item.name} </div>
                   <div className={styles.cardInfo}>
                     Price: <b>{item.price}$</b> Quantity: <b>{item.quantity}</b>
                   </div>
