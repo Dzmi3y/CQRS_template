@@ -10,10 +10,13 @@ const AccountReducer = (
       return { ...state, authData: action.payload };
 
     case AccountActionTypes.SIGN_OUT:
-      return { accountInfo: null, authData: null };
+      return { accountInfo: null, authData: null, orderHistory: [] };
 
     case AccountActionTypes.SET_Account_INFO:
       return { ...state, accountInfo: action.payload };
+
+    case AccountActionTypes.SET_ORDER_LIST:
+      return { ...state, orderHistory: action.payload };
 
     default:
       return state;

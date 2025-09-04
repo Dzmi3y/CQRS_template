@@ -14,10 +14,6 @@ import { BASE_URL } from "@api/apiConfig";
 
 const MenuSlider: React.FC<{ products: product[] }> = ({ products }) => {
   const sliderRef = useRef<HTMLDivElement>(null);
-
-  console.log("test");
-  console.log(products);
-
   const { cart, dispatch } = useCart();
 
   const addToCart = (currentProduct: product) => {

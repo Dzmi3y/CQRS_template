@@ -29,7 +29,7 @@ public class OrdersController : ControllerBase
         var userId = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
         var result = await _mediator.Send(new CreateOrderCommand(userId, request.OrderList));
 
-        return result.Error == null ? BadRequest(result) : Ok(result);
+        return result.Error == null ? Ok(result)  :BadRequest(result);
     }
 
     [HttpGet]

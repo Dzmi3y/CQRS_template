@@ -1,120 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
-import AccountInfo from "@models/AccountInfo";
 import OrderInfo from "@models/OrderInfo";
 import AccordionItem from "@components/AccordionItem/AccordionItem";
 import useAccount from "@hooks/useAccount";
 import { AccountActionTypes } from "@actions/AccountAction";
-import LogoutData from "@models/apiData/LogoutData";
 import { logout } from "@api/accountApi";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { getErrorMessage } from "@api/errorMessages";
+import { getOrder } from "@api/orderApi";
 
 const AccountDetails: React.FC<{ onSignOutComplete: () => void }> = ({
   onSignOutComplete,
 }) => {
   const { account, dispatch } = useAccount();
 
-  const [orderInfoList, SetOrderInfoList] = useState<Array<OrderInfo>>([
-    {
-      Id: "1",
-      Address: "Sweet Street 1",
-      Status: "Pending",
-      CreatedAt: new Date(),
-      PhoneNumber: "123456",
-      OrderItems: [
-        {
-          ProductId: "1",
-          ProductName: "Macaron - Vanilla",
-          Price: 120,
-          Quantity: 1,
-        },
-      ],
-    },
-    {
-      Id: "2",
-      Address: "Sweet Street 2",
-      Status: "Shipped",
-      CreatedAt: new Date(),
-      PhoneNumber: "654321",
-      OrderItems: [
-        {
-          ProductId: "2",
-          ProductName: "Macaron - Raspberry",
-          Price: 130,
-          Quantity: 2,
-        },
-        {
-          ProductId: "3",
-          ProductName: "Macaron - Pistachio",
-          Price: 140,
-          Quantity: 1,
-        },
-      ],
-    },
-    {
-      Id: "3",
-      Address: "Sweet Street 3",
-      Status: "Delivered",
-      CreatedAt: new Date(),
-      PhoneNumber: "789012",
-      OrderItems: [
-        {
-          ProductId: "4",
-          ProductName: "Macaron - Chocolate",
-          Price: 150,
-          Quantity: 1,
-        },
-        {
-          ProductId: "5",
-          ProductName: "Macaron - Lemon",
-          Price: 125,
-          Quantity: 3,
-        },
-        {
-          ProductId: "6",
-          ProductName: "Macaron - Coffee",
-          Price: 135,
-          Quantity: 1,
-        },
-      ],
-    },
-    {
-      Id: "4",
-      Address: "Sweet Street 4",
-      Status: "Cancelled",
-      CreatedAt: new Date(),
-      PhoneNumber: "345678",
-      OrderItems: [
-        {
-          ProductId: "7",
-          ProductName: "Macaron - Strawberry",
-          Price: 130,
-          Quantity: 2,
-        },
-        {
-          ProductId: "8",
-          ProductName: "Macaron - Mango",
-          Price: 145,
-          Quantity: 1,
-        },
-        {
-          ProductId: "9",
-          ProductName: "Macaron - Matcha",
-          Price: 140,
-          Quantity: 2,
-        },
-        {
-          ProductId: "10",
-          ProductName: "Macaron - Coconut",
-          Price: 150,
-          Quantity: 1,
-        },
-      ],
-    },
-  ]);
-
-  const mutation = useMutation({
+  const logoutMutation = useMutation({
     mutationFn: logout,
     onSuccess: (data) => {
       dispatch({ type: AccountActionTypes.SIGN_OUT });
@@ -130,7 +30,7 @@ const AccountDetails: React.FC<{ onSignOutComplete: () => void }> = ({
 
   const handleSignOut = () => {
     if (account.authData) {
-      mutation.mutate(account.authData);
+      logoutMutation.mutate(account.authData);
     }
   };
 
@@ -144,52 +44,56 @@ const AccountDetails: React.FC<{ onSignOutComplete: () => void }> = ({
       </div>
 
       <div className={styles.orderContainer}>
-        <div className={styles.orderList}>
-          {orderInfoList.map((orderInfo) => (
-            <AccordionItem
-              key={orderInfo.Id}
-              title={`Id: ${orderInfo.Id} Price: ${orderInfo.OrderItems.reduce(
-                (accumulator, orderItem) => accumulator + orderItem.Price,
-                0
-              )}
+        {account.orderHistory.length !== 0 && (
+          <div className={styles.orderList}>
+            {account.orderHistory.map((orderInfo) => (
+              <AccordionItem
+                key={orderInfo.id}
+                title={`Id: ${
+                  orderInfo.id
+                } Price: ${orderInfo.orderItems.reduce(
+                  (accumulator, orderItem) => accumulator + orderItem.price,
+                  0
+                )}
               $`}
-            >
-              <div>
-                <div className={styles.orderInfo}>
-                  <b>Status: </b>
-                  <div>{orderInfo.Status}</div>
+              >
+                <div>
+                  <div className={styles.orderInfo}>
+                    <b>Status: </b>
+                    <div>{orderInfo.status}</div>
+                  </div>
+                  <div className={styles.orderInfo}>
+                    <b>Date: </b>
+                    <div>{orderInfo.createdAt.toLocaleString()}</div>
+                  </div>
+                  <div className={styles.orderInfo}>
+                    <b>Address: </b>
+                    <div>{orderInfo.address}</div>
+                  </div>
+                  <div className={styles.orderInfo}>
+                    <b>Phone: </b>
+                    <div>{orderInfo.phoneNumber}</div>
+                  </div>
+                  <ul>
+                    {orderInfo.orderItems.map((orderItem) => (
+                      <li key={orderItem.productId}>
+                        <div>
+                          <b>Name:</b> <i>{orderItem.productName}</i>
+                        </div>
+                        <div>
+                          <b>Price:</b> <i>{orderItem.price}$</i>
+                        </div>
+                        <div>
+                          <b>Quantity:</b> <i>{orderItem.quantity}</i>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <div className={styles.orderInfo}>
-                  <b>Date: </b>
-                  <div>{orderInfo.CreatedAt.toLocaleString()}</div>
-                </div>
-                <div className={styles.orderInfo}>
-                  <b>Address: </b>
-                  <div>{orderInfo.Address}</div>
-                </div>
-                <div className={styles.orderInfo}>
-                  <b>Phone: </b>
-                  <div>{orderInfo.PhoneNumber}</div>
-                </div>
-                <ul>
-                  {orderInfo.OrderItems.map((orderItem) => (
-                    <li key={orderItem.ProductId}>
-                      <div>
-                        <b>Name:</b> <i>{orderItem.ProductName}</i>
-                      </div>
-                      <div>
-                        <b>Price:</b> <i>{orderItem.Price}$</i>
-                      </div>
-                      <div>
-                        <b>Quantity:</b> <i>{orderItem.Quantity}</i>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </AccordionItem>
-          ))}
-        </div>
+              </AccordionItem>
+            ))}
+          </div>
+        )}
       </div>
 
       <button className={styles.button} onClick={handleSignOut}>

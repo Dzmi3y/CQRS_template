@@ -1,12 +1,12 @@
 import DetailedOrderItem from "./DetailedOrderItem";
 
 interface OrderInfo {
-  Id: string;
-  Address: string;
-  PhoneNumber: string;
-  Status: string;
-  CreatedAt: Date;
-  OrderItems: Array<DetailedOrderItem>;
+  id: string;
+  address: string;
+  phoneNumber: string;
+  status: string;
+  createdAt: Date;
+  orderItems: Array<DetailedOrderItem>;
 }
 
 export default OrderInfo;

@@ -1,8 +1,8 @@
 interface DetailedOrderItem {
-  ProductId: string;
-  ProductName: string;
-  Price: number;
-  Quantity: number;
+  productId: string;
+  productName: string;
+  price: number;
+  quantity: number;
 }
 
 export default DetailedOrderItem;

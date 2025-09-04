@@ -8,6 +8,7 @@ import useAccount from "@hooks/useAccount";
 import { info } from "@api/accountApi";
 import { useMutation } from "@tanstack/react-query";
 import { AccountActionTypes } from "@actions/AccountAction";
+import { getOrder } from "@api/orderApi";
 
 const AccountModal: React.FC<{
   isHidden: boolean;
@@ -16,7 +17,19 @@ const AccountModal: React.FC<{
   const { account, dispatch } = useAccount();
   const [isSignInPriority, setIsSignInPriority] = useState<boolean>(true);
 
-  const mutation = useMutation({
+  const orderHistoryMutation = useMutation({
+    mutationFn: getOrder,
+    onSuccess: (data) => {
+      dispatch({ type: AccountActionTypes.SET_ORDER_LIST, payload: data });
+      console.log("Order list:");
+      console.log(data);
+    },
+    onError: (error) => {
+      console.error("Order list load error:", error);
+    },
+  });
+
+  const accountInfoMutation = useMutation({
     mutationFn: info,
     onSuccess: (data) => {
       dispatch({ type: AccountActionTypes.SET_Account_INFO, payload: data });
@@ -49,7 +62,7 @@ const AccountModal: React.FC<{
 
   useEffect(() => {
     if (account.authData) {
-      mutation.mutate(account.authData);
+      accountInfoMutation.mutate(account.authData);
     } else {
       console.error("authData is null");
     }
@@ -60,6 +73,9 @@ const AccountModal: React.FC<{
       document.body?.classList.remove("no-scroll");
     } else {
       document.body?.classList.add("no-scroll");
+      if (account.authData) {
+        orderHistoryMutation.mutate(account.authData);
+      }
     }
   }, [isHidden]);
   return (

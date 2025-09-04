@@ -6,3 +6,4 @@ export const INFO_URL_API = `${BASE_URL_API}/auth/info`;
 export const LOGOUT_URL_API = `${BASE_URL_API}/auth/logout`;
 export const REGISTER_URL_API = `${BASE_URL_API}/auth/register`;
 export const PRODUCTS_URL_API = `${BASE_URL_API}/products`;
+export const ORDERS_URL_API = `${BASE_URL_API}/orders`;
