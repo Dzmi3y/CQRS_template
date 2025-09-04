@@ -5,6 +5,10 @@ import OrderInfo from "@models/OrderInfo";
 import AccordionItem from "@components/AccordionItem/AccordionItem";
 import useAccount from "@hooks/useAccount";
 import { AccountActionTypes } from "@actions/AccountAction";
+import LogoutData from "@models/apiData/LogoutData";
+import { logout } from "@api/accountApi";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { getErrorMessage } from "@api/errorMessages";
 
 const AccountDetails: React.FC<{ onSignOutComplete: () => void }> = ({
   onSignOutComplete,
@@ -110,14 +114,24 @@ const AccountDetails: React.FC<{ onSignOutComplete: () => void }> = ({
     },
   ]);
 
+  const mutation = useMutation({
+    mutationFn: logout,
+    onSuccess: (data) => {
+      dispatch({ type: AccountActionTypes.SIGN_OUT });
+      onSignOutComplete();
+      console.log("Logout Success:");
+      console.log(data);
+    },
+    onError: (error) => {
+      console.error("Logout error:", error);
+      console.error(getErrorMessage(error.message));
+    },
+  });
+
   const handleSignOut = () => {
-    if (account.accountInfo) {
-      dispatch({
-        type: AccountActionTypes.SIGN_OUT,
-        payload: account.accountInfo.userId,
-      });
+    if (account.authData) {
+      mutation.mutate(account.authData);
     }
-    onSignOutComplete();
   };
 
   return (

@@ -52,7 +52,7 @@ const AccountModal: React.FC<{
     >
       <div className={styles.content}>
         <AccountContainer onToggleVisibility={() => onToggleVisibility()}>
-          {account.accountInfo ? (
+          {account.authData ? (
             <AccountDetails onSignOutComplete={onSignOutComplete} />
           ) : (
             <div>

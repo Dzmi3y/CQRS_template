@@ -3,6 +3,9 @@ import styles from "./styles.module.scss";
 import SignInContract from "@models/SignInContract";
 import useAccount from "@hooks/useAccount";
 import { AccountActionTypes } from "@actions/AccountAction";
+import { login } from "@api/accountApi";
+import { useMutation } from "@tanstack/react-query";
+import { getErrorMessage } from "@api/errorMessages";
 
 const SignIn: React.FC<{ onSignInComplete: () => void }> = ({
   onSignInComplete,
@@ -13,12 +16,12 @@ const SignIn: React.FC<{ onSignInComplete: () => void }> = ({
     Email: "",
     Password: "",
   });
-
-  const checkEmail: (email: string) => boolean = (email: string) => {
-    return email !== "test@test.com";
-  };
+  const [apiErrorMessage, setApiErrorMessage] = useState<string | null>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (apiErrorMessage) {
+      setApiErrorMessage(null);
+    }
     const { id, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -31,28 +34,36 @@ const SignIn: React.FC<{ onSignInComplete: () => void }> = ({
     }
   };
 
+  const mutation = useMutation({
+    mutationFn: login,
+    onSuccess: (data) => {
+      dispatch({ type: AccountActionTypes.SIGN_IN, payload: data });
+      console.log("Login Success:");
+      console.log(data);
+      onSignInComplete();
+    },
+    onError: (error) => {
+      console.error("Login error:", error);
+      console.error(getErrorMessage(error.message));
+      setApiErrorMessage(getErrorMessage(error.message));
+    },
+  });
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const emailInput = document.getElementById("Email") as HTMLInputElement;
 
-    if (checkEmail(formData.Email)) {
-      emailInput.setCustomValidity("Email don't exist");
-      emailInput.reportValidity();
-      return;
-    }
-
     emailInput.setCustomValidity("");
-    dispatch({ type: AccountActionTypes.SIGN_IN, payload: formData });
 
-    console.log("Form submitted:", formData);
+    mutation.mutate(formData);
+
     setFormData({
       Email: "",
       Password: "",
     });
-
-    onSignInComplete();
   };
+
   return (
     <div className={styles.container}>
       <div className={styles.title}>Sign In</div>
@@ -81,6 +92,10 @@ const SignIn: React.FC<{ onSignInComplete: () => void }> = ({
             required
           />
         </div>
+        {apiErrorMessage && (
+          <label className={styles.exception}>{apiErrorMessage}</label>
+        )}
+
         <button className={styles.button} type="submit">
           Submit
         </button>

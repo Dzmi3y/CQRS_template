@@ -3,11 +3,13 @@ import styles from "./styles.module.scss";
 import SignUpContract from "@models/SignUpContract";
 import { AccountActionTypes } from "@actions/AccountAction";
 import useAccount from "@hooks/useAccount";
+import { getErrorMessage } from "@api/errorMessages";
+import { useMutation } from "@tanstack/react-query";
 
 const SignUp: React.FC<{ onSignUpComplete: () => void }> = ({
   onSignUpComplete,
 }) => {
-  const { account, dispatch } = useAccount();
+  //const { account, dispatch } = useAccount();
   const [formData, setFormData] = useState<SignUpContract>({
     Name: "",
     Email: "",
@@ -40,6 +42,18 @@ const SignUp: React.FC<{ onSignUpComplete: () => void }> = ({
       confirmInput.setCustomValidity("");
     }
   };
+
+  // const mutation = useMutation({
+  //   mutationFn: register,
+  //   onSuccess: (data) => {
+  //     dispatch({ type: AccountActionTypes.SIGN_UP, payload: data });
+  //     onSignUpComplete();
+  //   },
+  //   onError: (error) => {
+  //     console.error("Register error:", error);
+  //     console.error(getErrorMessage(error.message));
+  //   },
+  // });
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -75,9 +89,7 @@ const SignUp: React.FC<{ onSignUpComplete: () => void }> = ({
       DefaultAddress: "",
     });
 
-    dispatch({ type: AccountActionTypes.SIGN_UP, payload: formData });
-
-    onSignUpComplete();
+    // mutation.mutate();
   };
   return (
     <div className={styles.container}>
