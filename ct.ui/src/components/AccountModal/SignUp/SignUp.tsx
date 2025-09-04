@@ -5,11 +5,14 @@ import { AccountActionTypes } from "@actions/AccountAction";
 import useAccount from "@hooks/useAccount";
 import { getErrorMessage } from "@api/errorMessages";
 import { useMutation } from "@tanstack/react-query";
+import { register } from "@api/accountApi";
 
 const SignUp: React.FC<{ onSignUpComplete: () => void }> = ({
   onSignUpComplete,
 }) => {
   //const { account, dispatch } = useAccount();
+  const [apiErrorMessage, setApiErrorMessage] = useState<string | null>(null);
+
   const [formData, setFormData] = useState<SignUpContract>({
     Name: "",
     Email: "",
@@ -19,12 +22,9 @@ const SignUp: React.FC<{ onSignUpComplete: () => void }> = ({
     DefaultAddress: "",
   });
 
-  const checkEmail: (email: string) => boolean = (email: string) => {
-    return email === "test@test.com";
-  };
-
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
+    setApiErrorMessage(null);
     setFormData((prev) => ({
       ...prev,
       [id]: value,
@@ -43,17 +43,29 @@ const SignUp: React.FC<{ onSignUpComplete: () => void }> = ({
     }
   };
 
-  // const mutation = useMutation({
-  //   mutationFn: register,
-  //   onSuccess: (data) => {
-  //     dispatch({ type: AccountActionTypes.SIGN_UP, payload: data });
-  //     onSignUpComplete();
-  //   },
-  //   onError: (error) => {
-  //     console.error("Register error:", error);
-  //     console.error(getErrorMessage(error.message));
-  //   },
-  // });
+  const mutation = useMutation({
+    mutationFn: register,
+    onSuccess: (data) => {
+      console.log("Form submitted:", formData);
+      console.log("Register Success:");
+      console.log(data);
+      setFormData({
+        Name: "",
+        Email: "",
+        Password: "",
+        ConfirmPassword: "",
+        DefaultPhone: "",
+        DefaultAddress: "",
+      });
+      onSignUpComplete();
+      setApiErrorMessage(null);
+    },
+    onError: (error) => {
+      console.error("Register error:", error);
+      console.error(getErrorMessage(error.message));
+      setApiErrorMessage(getErrorMessage(error.message));
+    },
+  });
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -64,12 +76,6 @@ const SignUp: React.FC<{ onSignUpComplete: () => void }> = ({
 
     const emailInput = document.getElementById("Email") as HTMLInputElement;
 
-    if (checkEmail(formData.Email)) {
-      emailInput.setCustomValidity("Email already exist");
-      emailInput.reportValidity();
-      return;
-    }
-
     if (formData.Password !== formData.ConfirmPassword) {
       confirmInput.setCustomValidity("Passwords do not match");
       confirmInput.reportValidity();
@@ -79,17 +85,7 @@ const SignUp: React.FC<{ onSignUpComplete: () => void }> = ({
     confirmInput.setCustomValidity("");
     emailInput.setCustomValidity("");
 
-    console.log("Form submitted:", formData);
-    setFormData({
-      Name: "",
-      Email: "",
-      Password: "",
-      ConfirmPassword: "",
-      DefaultPhone: "",
-      DefaultAddress: "",
-    });
-
-    // mutation.mutate();
+    mutation.mutate(formData);
   };
   return (
     <div className={styles.container}>
@@ -165,6 +161,9 @@ const SignUp: React.FC<{ onSignUpComplete: () => void }> = ({
             onChange={handleChange}
           />
         </div>
+        {apiErrorMessage && (
+          <label className={styles.exception}>{apiErrorMessage}</label>
+        )}
         <button className={styles.button} type="submit">
           Submit
         </button>

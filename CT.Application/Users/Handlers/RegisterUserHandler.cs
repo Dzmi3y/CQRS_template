@@ -51,9 +51,6 @@ public class RegisterUserHandler : IRequestHandler<RegisterUserCommand, Registra
         user.PasswordHash = _passwordHasher.HashPassword(user, request.Password);
 
         await _appDbContext.Users.AddAsync(user, cancellationToken);
-        await _appDbContext.SaveChangesAsync(cancellationToken);
-
-        await _appDbContext.Users.AddAsync(user, cancellationToken);
         var saved = await _appDbContext.SaveChangesAsync(cancellationToken);
 
         if (saved == 0)

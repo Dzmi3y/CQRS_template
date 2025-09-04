@@ -33,7 +33,6 @@ const AccountModal: React.FC<{
     mutationFn: info,
     onSuccess: (data) => {
       dispatch({ type: AccountActionTypes.SET_Account_INFO, payload: data });
-      onSignInComplete();
     },
     onError: (error) => {
       console.error("InfoApi error:", error);
@@ -53,7 +52,7 @@ const AccountModal: React.FC<{
 
   const onSignUpComplete = () => {
     console.log("sign up complete");
-    onToggleVisibility();
+    setIsSignInPriority(true);
   };
   const onSignOutComplete = () => {
     console.log("sign out complete");

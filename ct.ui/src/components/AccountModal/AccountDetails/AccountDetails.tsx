@@ -52,7 +52,8 @@ const AccountDetails: React.FC<{ onSignOutComplete: () => void }> = ({
                 title={`Id: ${
                   orderInfo.id
                 } Price: ${orderInfo.orderItems.reduce(
-                  (accumulator, orderItem) => accumulator + orderItem.price,
+                  (accumulator, orderItem) =>
+                    accumulator + orderItem.price * orderItem.quantity,
                   0
                 )}
               $`}

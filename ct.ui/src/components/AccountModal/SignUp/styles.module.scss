@@ -70,3 +70,10 @@
     gap: 5px;
     margin-bottom: 10px;
   }
+
+  .exception{
+    font-family: var(--bold-font);
+    font-size: var(--font-size-30);
+    color: red;
+    text-transform: uppercase;
+  }
