@@ -6,14 +6,14 @@ const AccountReducer = (
   action: AccountAction
 ): AccountState => {
   switch (action.type) {
-    case AccountActionTypes.SIGN_UP:
-      throw new Error("Not implemented");
-
     case AccountActionTypes.SIGN_IN:
       return { ...state, authData: action.payload };
 
     case AccountActionTypes.SIGN_OUT:
       return { accountInfo: null, authData: null };
+
+    case AccountActionTypes.SET_Account_INFO:
+      return { ...state, accountInfo: action.payload };
 
     default:
       return state;

@@ -5,13 +5,27 @@ import SignUp from "./SignUp/SignUp";
 import SignIn from "./SignIn/SignIn";
 import AccountDetails from "./AccountDetails/AccountDetails";
 import useAccount from "@hooks/useAccount";
+import { info } from "@api/accountApi";
+import { useMutation } from "@tanstack/react-query";
+import { AccountActionTypes } from "@actions/AccountAction";
 
 const AccountModal: React.FC<{
   isHidden: boolean;
   onToggleVisibility: () => void;
 }> = ({ isHidden, onToggleVisibility }) => {
-  const { account } = useAccount();
+  const { account, dispatch } = useAccount();
   const [isSignInPriority, setIsSignInPriority] = useState<boolean>(true);
+
+  const mutation = useMutation({
+    mutationFn: info,
+    onSuccess: (data) => {
+      dispatch({ type: AccountActionTypes.SET_Account_INFO, payload: data });
+      onSignInComplete();
+    },
+    onError: (error) => {
+      console.error("InfoApi error:", error);
+    },
+  });
 
   const onClickBackground = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
@@ -33,8 +47,13 @@ const AccountModal: React.FC<{
     onToggleVisibility();
   };
 
-  console.log("account.accountInfo");
-  console.log(account.accountInfo);
+  useEffect(() => {
+    if (account.authData) {
+      mutation.mutate(account.authData);
+    } else {
+      console.error("authData is null");
+    }
+  }, [account.authData]);
 
   useEffect(() => {
     if (isHidden) {
