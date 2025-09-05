@@ -51,7 +51,9 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
     typeof(CreateOrderCommand).Assembly,
     typeof(CreateOrderHandler).Assembly,
     typeof(GetOrdersHandler).Assembly,
-    typeof(GetOrdersQuery).Assembly
+    typeof(GetOrdersQuery).Assembly,
+    typeof(RefreshTokenCommand).Assembly,
+    typeof(RefreshTokenHandler).Assembly
 ));
 
 JwtSecurityTokenHandler.DefaultMapInboundClaims = false;

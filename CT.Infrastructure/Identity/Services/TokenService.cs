@@ -59,7 +59,7 @@ public class TokenService : ITokenService
         };
     }
 
-    public async Task<AuthenticationResultDTO> GenerateRefreshTokenAsync(Guid refreshToken)
+    public async Task<AuthenticationResultDTO> RefreshTokenAsync(Guid refreshToken)
     {
         var storedRefreshToken = await _refreshTokenService.GetRefreshTokenInfoAsync(refreshToken);
 

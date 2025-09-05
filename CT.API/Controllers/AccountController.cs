@@ -27,12 +27,12 @@ public class AccountController : ControllerBase
 
         if (string.IsNullOrEmpty(request.Password)) return BadRequest(Resources.PasswordIsRequired);
 
-        var productList =
+        var authResult =
             await _mediator.Send(
                 new AuthenticateUserCommand(request.Email, request.Password));
-        if (productList.Error != null) return Unauthorized(productList.Error.ToString());
+        if (authResult.Error != null) return Unauthorized(authResult.Error.ToString());
 
-        return Ok(productList);
+        return Ok(authResult);
     }
 
     [HttpPost("register")]
@@ -83,5 +83,17 @@ public class AccountController : ControllerBase
         var userEmail = User.FindFirst(JwtRegisteredClaimNames.Email)?.Value;
 
         return Ok(new { userId, userName, userEmail });
+    }
+    
+    [HttpPost("refresh")]
+    [AllowAnonymous]
+    public async Task<IActionResult> Refresh([FromBody] RefreshTokenRequest request)
+    {
+        var authResult =
+            await _mediator.Send(
+                new RefreshTokenCommand(request.RefreshToken));
+        if (authResult.Error != null) return Unauthorized(authResult.Error.ToString());
+
+        return Ok(authResult);
     }
 }

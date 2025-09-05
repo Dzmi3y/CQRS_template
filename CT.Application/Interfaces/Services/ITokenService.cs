@@ -6,5 +6,5 @@ namespace CT.Application.Interfaces.Services;
 public interface ITokenService
 {
     Task<AuthenticationResultDTO> GenerateAuthenticationResultAsync(User user);
-    Task<AuthenticationResultDTO> GenerateRefreshTokenAsync(Guid refreshToken);
+    Task<AuthenticationResultDTO> RefreshTokenAsync(Guid refreshToken);
 }
