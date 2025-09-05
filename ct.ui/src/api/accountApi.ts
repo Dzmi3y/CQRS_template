@@ -3,6 +3,7 @@ import {
   INFO_URL_API,
   LOGIN_URL_API,
   LOGOUT_URL_API,
+  REFRESH_TOKEN_API,
   REGISTER_URL_API,
 } from "./apiConfig";
 import AuthData from "@models/apiData/AuthData";
@@ -11,6 +12,7 @@ import LogoutData from "@models/apiData/LogoutData";
 import AccountInfo from "@models/AccountInfo";
 import SignUpContract from "@models/SignUpContract";
 import RegisterResult from "@models/apiData/RegisterResult";
+import accountCache from "@mixins/Cache/accountCache";
 
 export const register = async (
   payload: SignUpContract
@@ -31,20 +33,32 @@ export const login = async (payload: SignInContract): Promise<AuthData> => {
   });
 };
 
-export const logout = async (payload: AuthData | null): Promise<LogoutData> => {
+export const logout = async (): Promise<LogoutData> => {
+  const account = accountCache.get();
   return fetchClient<LogoutData>(`${LOGOUT_URL_API}`, {
     method: "POST",
     headers: {
-      authorization: `Bearer ${payload?.accessToken}`,
+      authorization: `Bearer ${account.authData?.accessToken}`,
     },
   });
 };
 
-export const info = async (payload: AuthData): Promise<AccountInfo> => {
+export const info = async (): Promise<AccountInfo> => {
+  const account = accountCache.get();
   return fetchClient<AccountInfo>(`${INFO_URL_API}`, {
     method: "GET",
     headers: {
-      authorization: `Bearer ${payload.accessToken}`,
+      authorization: `Bearer ${account.authData?.accessToken}`,
     },
+  });
+};
+
+export const refresh = async (): Promise<AuthData> => {
+  const account = accountCache.get();
+  return fetchClient<AuthData>(`${REFRESH_TOKEN_API}`, {
+    method: "post",
+    body: JSON.stringify({
+      refreshToken: account.authData?.refreshToken,
+    }),
   });
 };

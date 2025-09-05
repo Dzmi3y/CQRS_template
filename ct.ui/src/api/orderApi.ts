@@ -1,32 +1,30 @@
 import { fetchClient } from "./fetchClient";
 import { ORDERS_URL_API } from "./apiConfig";
-import AuthData from "@models/apiData/AuthData";
 import OrderInfo from "@models/OrderInfo";
-import OrderPayload from "@models/apiData/OrderPayload";
 import CreateOrderResult from "@models/apiData/CreateOrderResult";
+import accountCache from "@mixins/Cache/accountCache";
+import CreateOrderRequest from "@models/apiData/CreateOrderRequest";
 
 export const setOrder = async (
-  payload: OrderPayload
+  payload: CreateOrderRequest
 ): Promise<CreateOrderResult> => {
-  console.log("OrderItems");
-  console.log(JSON.stringify(payload.Order));
+  const account = accountCache.get();
   return fetchClient<CreateOrderResult>(`${ORDERS_URL_API}`, {
     method: "POST",
     headers: {
-      authorization: `Bearer ${payload.authData.accessToken}`,
+      authorization: `Bearer ${account.authData?.accessToken}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(payload.Order),
+    body: JSON.stringify(payload),
   });
 };
 
-export const getOrder = async (
-  payload: AuthData
-): Promise<Array<OrderInfo>> => {
+export const getOrder = async (): Promise<Array<OrderInfo>> => {
+  const account = accountCache.get();
   return fetchClient<Array<OrderInfo>>(`${ORDERS_URL_API}`, {
     method: "GET",
     headers: {
-      authorization: `Bearer ${payload.accessToken}`,
+      authorization: `Bearer ${account.authData?.accessToken}`,
     },
   });
 };

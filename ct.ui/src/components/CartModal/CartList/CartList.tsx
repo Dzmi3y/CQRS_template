@@ -12,7 +12,8 @@ import { setOrder } from "@api/orderApi";
 import ShortOrderItem from "@models/apiData/ShortOrderItem";
 import useAccount from "@hooks/useAccount";
 import CreateOrderRequest from "@models/apiData/CreateOrderRequest";
-import OrderPayload from "@models/apiData/OrderPayload";
+import { useRecoverableMutation } from "@hooks/useRecoverableMutation";
+import { logout } from "@api/accountApi";
 
 const CartList: React.FC<{ onToggleVisibility: () => void }> = ({
   onToggleVisibility,
@@ -20,8 +21,7 @@ const CartList: React.FC<{ onToggleVisibility: () => void }> = ({
   const { cart, dispatch } = useCart();
   const { account } = useAccount();
 
-  const mutation = useMutation({
-    mutationFn: setOrder,
+  const mutation = useRecoverableMutation(setOrder, {
     onSuccess: (data) => {
       dispatch({ type: CartActionTypes.CLEAR });
       console.log("Order created");
@@ -44,13 +44,7 @@ const CartList: React.FC<{ onToggleVisibility: () => void }> = ({
 
     if (account.authData && orderItems) {
       const newOrder: CreateOrderRequest = { OrderList: orderItems };
-      const orderPayload: OrderPayload = {
-        authData: account.authData,
-        Order: newOrder,
-      };
-      console.log("newOrder");
-      console.log(orderPayload);
-      mutation.mutate(orderPayload);
+      mutation.mutate(newOrder);
     }
   };
 

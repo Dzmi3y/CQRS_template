@@ -1,3 +1,6 @@
+import { HttpError } from "@mixins/Errors/HttpError";
+import { Exception } from "sass";
+
 export async function fetchClient<T>(
   input: RequestInfo,
   init?: RequestInit
@@ -12,7 +15,7 @@ export async function fetchClient<T>(
 
   if (!response.ok) {
     const errorText = await response.text();
-    throw new Error(`HTTP ${response.status}: ${errorText}`);
+    throw new HttpError(response.status, errorText);
   }
 
   return response.json() as Promise<T>;

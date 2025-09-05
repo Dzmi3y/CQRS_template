@@ -1,36 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./styles.module.scss";
-import OrderInfo from "@models/OrderInfo";
 import AccordionItem from "@components/AccordionItem/AccordionItem";
 import useAccount from "@hooks/useAccount";
 import { AccountActionTypes } from "@actions/AccountAction";
 import { logout } from "@api/accountApi";
-import { useMutation } from "@tanstack/react-query";
-import { getErrorMessage } from "@api/errorMessages";
-import { getOrder } from "@api/orderApi";
+import { useRecoverableMutation } from "@hooks/useRecoverableMutation";
 
 const AccountDetails: React.FC<{ onSignOutComplete: () => void }> = ({
   onSignOutComplete,
 }) => {
   const { account, dispatch } = useAccount();
 
-  const logoutMutation = useMutation({
-    mutationFn: logout,
+  const logoutMutation = useRecoverableMutation(logout, {
     onSuccess: (data) => {
       dispatch({ type: AccountActionTypes.SIGN_OUT });
       onSignOutComplete();
-      console.log("Logout Success:");
-      console.log(data);
+      console.log("Logout Success:", data);
     },
     onError: (error) => {
       console.error("Logout error:", error);
-      console.error(getErrorMessage(error.message));
     },
   });
 
   const handleSignOut = () => {
     if (account.authData) {
-      logoutMutation.mutate(account.authData);
+      logoutMutation.mutate(null);
     }
   };
 

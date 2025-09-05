@@ -76,6 +76,7 @@ public class AccountController : ControllerBase
     }
 
     [HttpGet("info")]
+    [Authorize]
     public IActionResult AccountInfo()
     {
         var userId = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;

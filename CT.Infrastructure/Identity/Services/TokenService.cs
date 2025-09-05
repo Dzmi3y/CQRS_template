@@ -25,6 +25,7 @@ public class TokenService : ITokenService
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.UTF8.GetBytes(_jwtSettings.Secret);
+        var now = DateTime.UtcNow;
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {
@@ -32,10 +33,14 @@ public class TokenService : ITokenService
             {
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             }),
-            Expires = DateTime.UtcNow.Add(_jwtSettings.AccessTokenLifetime),
-            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
+            Expires = now.Add(_jwtSettings.AccessTokenLifetime),
+            NotBefore = now,
+            IssuedAt = now,
+            SigningCredentials = new SigningCredentials(
+                new SymmetricSecurityKey(key),
                 SecurityAlgorithms.HmacSha256Signature)
         };
+
 
         tokenDescriptor.Subject.AddClaim(new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()));
         tokenDescriptor.Subject.AddClaim(new Claim(JwtRegisteredClaimNames.Name, user.Name));

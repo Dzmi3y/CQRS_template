@@ -15,8 +15,6 @@ const MenuBlock = () => {
   if (!isLoading) {
     if (error) {
       console.log(error);
-    } else {
-      console.log(data);
     }
   }
 

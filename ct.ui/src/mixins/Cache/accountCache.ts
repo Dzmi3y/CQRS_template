@@ -7,7 +7,7 @@ const defaultValue: AccountState = {
 };
 
 const accountCache = {
-  get: () =>
+  get: (): AccountState =>
     JSON.parse(localStorage.getItem("account") || JSON.stringify(defaultValue)),
   set: (account: AccountState) =>
     localStorage.setItem("account", JSON.stringify(account)),

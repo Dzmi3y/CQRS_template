@@ -4,6 +4,7 @@ using CT.Application.Orders.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.JsonWebTokens;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CT.API.Controllers;
 
@@ -19,6 +20,7 @@ public class OrdersController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> Post(CreateOrderRequest request)
     {
         if (request == null) return BadRequest(Resources.RequestCannotBeNull);
@@ -33,6 +35,7 @@ public class OrdersController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize]
     public async Task<IActionResult> Get()
     {
         var userId = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
