@@ -1,27 +1,32 @@
 import CartAction, { CartActionTypes } from "@actions/CartAction";
 import CartState from "@states/CartState";
 import CartItem from "@models/CartItem";
+import cartCache from "@mixins/Cache/cartCache";
 
 const CartReducer = (state: CartState, action: CartAction): CartState => {
   switch (action.type) {
     case CartActionTypes.ADD: {
+      let newValue: CartState = [];
       const newProduct = action.payload;
       const existingItem: CartItem | undefined = state.find(
         (item) => item.id === newProduct.id
       );
 
       if (existingItem) {
-        return state.map((item) =>
+        newValue = state.map((item) =>
           item.id === newProduct.id
             ? { ...item, quantity: (item.quantity || 1) + 1 }
             : item
         );
       } else {
-        return [...state, { ...newProduct, quantity: 1 }];
+        newValue = [...state, { ...newProduct, quantity: 1 }];
       }
+
+      cartCache.set(newValue);
+      return newValue;
     }
     case CartActionTypes.REMOVE: {
-      return state.reduce<CartItem[]>((acc, item) => {
+      const newValue = state.reduce<CartItem[]>((acc, item) => {
         if (item.id !== action.payload) {
           return [...acc, item];
         }
@@ -32,10 +37,15 @@ const CartReducer = (state: CartState, action: CartAction): CartState => {
 
         return acc;
       }, []);
+
+      cartCache.set(newValue);
+      return newValue;
     }
 
-    case CartActionTypes.CLEAR:
+    case CartActionTypes.CLEAR: {
+      cartCache.clear();
       return [];
+    }
     default:
       return state;
   }

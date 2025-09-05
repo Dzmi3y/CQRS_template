@@ -10,7 +10,7 @@ import SignInContract from "@models/SignInContract";
 import LogoutData from "@models/apiData/LogoutData";
 import AccountInfo from "@models/AccountInfo";
 import SignUpContract from "@models/SignUpContract";
-import RegisterResult from "@models/apiData/registerResult";
+import RegisterResult from "@models/apiData/RegisterResult";
 
 export const register = async (
   payload: SignUpContract
